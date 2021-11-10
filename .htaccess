@@ -1,0 +1,4 @@
+RewriteEngine on 
+RewriteRule ^([A-z0-9-]+)$ index.php?pmk=$1
+
+ErrorDocument 404 http://nganphat.ttcjsc.vn/404error

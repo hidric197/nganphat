@@ -1,0 +1,92 @@
+<form action="" method="post" name="form_filter_price" id="form_filter_price">
+<?php 
+$filter_brand = '';
+if (isset($_POST['filter_brand']) && !empty($_POST['filter_brand'])) {
+    $filter_brand = $_POST['filter_brand'];
+}
+
+$filter_price = '';
+if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
+    $filter_price = $_POST['filter_price'];
+}
+?>
+<div class="body-left-box filter-price">
+	<div class="body-left-box-title">Lọc theo giá</div>
+	<div class="body-left-box-inner">
+		<ul class="list-filter" style="">
+			<li class="filter-item" title="Dưới 100 Ngàn">
+				<label for="filter_price_1" class="select-filter-item" onclick="submitFormFilterPrice('01');">
+					<input class="chk-price-select" id="filter_price_1" type="checkbox" name="filter_price_1" value="01" <?php if($filter_price == '01') echo "checked='checked'"; ?> >
+					<span title="Dưới 100 Ngàn" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Dưới 100 Ngàn
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 100 - 500 Ngàn">
+				<label for="filter_price_2" class="select-filter-item" onclick="submitFormFilterPrice('02');">
+					<input class="chk-price-select" id="filter_price_2" type="checkbox" name="filter_price_2" value="02"  <?php if($filter_price == '02') echo "checked='checked'"; ?> >
+					<span title="Từ 100 - 500 Ngàn" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 100 - 500 Ngàn
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 500K - 1 Triệu">
+				<label for="filter_price_3" class="select-filter-item" onclick="submitFormFilterPrice('03');">
+					<input class="chk-price-select" id="filter_price_3" type="checkbox" name="filter_price_3" value="03"  <?php if($filter_price == '03') echo "checked='checked'"; ?> >
+					<span title="Từ 500K - 1 Triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 500K - 1 Triệu
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 1 - 2 Triệu">
+				<label for="filter_price_4" class="select-filter-item" onclick="submitFormFilterPrice('04');">
+					<input class="chk-price-select" id="filter_price_4" type="checkbox" name="filter_price_4" value="04" <?php if($filter_price == '04') echo "checked='checked'"; ?> >
+					<span title="Từ 1 - 2 Triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 1 - 2 Triệu
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 2 - 5 Triệu">
+				<label for="filter_price_5" class="select-filter-item" onclick="submitFormFilterPrice('05');">
+					<input class="chk-price-select" id="filter_price_5" type="checkbox" name="filter_price_5" value="05" <?php if($filter_price == '05') echo "checked='checked'"; ?> >
+					<span title="Từ 2 - 5 Triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 2 - 5 Triệu
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 5 - 10 Triệu">
+				<label for="filter_price_6" class="select-filter-item" onclick="submitFormFilterPrice('06');">
+					<input class="chk-price-select" id="filter_price_6" type="checkbox" name="filter_price_6" value="06" <?php if($filter_price == '06') echo "checked='checked'"; ?> >
+					<span title="Từ 5 - 10 Triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 5 - 10 Triệu
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Từ 10 - 20 triệu">
+				<label for="filter_price_7" class="select-filter-item" onclick="submitFormFilterPrice('07');">
+					<input class="chk-price-select" id="filter_price_7" type="checkbox" name="filter_price_7" value="07" <?php if($filter_price == '07') echo "checked='checked'"; ?> >
+					<span title="Từ 10 - 20 triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Từ 10 - 20 triệu
+					</span>
+				</label>
+			</li>
+			<li class="filter-item" title="Trên 20 Triệu">
+				<label for="filter_price_8" class="select-filter-item" onclick="submitFormFilterPrice('08');">
+					<input class="chk-price-select" id="filter_price_8" type="checkbox" name="filter_price_8" value="08" <?php if($filter_price == '08') echo "checked='checked'"; ?> >
+					<span title="Trên 20 Triệu" class="price-checker-link filter-check"></span>
+					<span class="filter-link">Trên 20 Triệu
+					</span>
+				</label>
+			</li>
+		</ul>
+	</div>
+</div>
+	<input type="hidden" name="filter_price" id="filter_price" value="<?=$filter_price?>">
+	<input type="hidden" name="filter_brand" value="<?=$filter_brand?>">
+</form>
+<script language="JavaScript" type="text/javascript">
+	function submitFormFilterPrice(priceId) {
+		document.getElementById("filter_price").value = priceId;
+		document.getElementById("form_filter_price").submit();
+	}	
+</script>
