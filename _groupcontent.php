@@ -310,11 +310,9 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
                 		    if ($filter_price == '01') {
                 		        $sql .= " AND A.product_sell_price < 100000 ";
                 		    } else if ($filter_price == '02') {
-                		        $sql .= " AND A.product_sell_price >= 100000 ";
-                		        $sql .= " AND A.product_sell_price < 500000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 100000 AND 500000";
                 		    } else if ($filter_price == '03') {
-                		        $sql .= " AND A.product_sell_price >= 500000 ";
-                		        $sql .= " AND A.product_sell_price < 1000000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 500000 AND 1000000";
                 		    } else if ($filter_price == '04') {
                 		        $sql .= " AND A.product_sell_price >= 1000000 ";
                 		        $sql .= " AND A.product_sell_price < 2000000 ";

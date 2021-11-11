@@ -14,6 +14,9 @@
 <link type="text/css" rel="stylesheet"
 	href="template/css/details-theme.css">
 
+<link type="text/css" rel="stylesheet"
+	href="template/css/lightboxed.css">
+
 <style>
 #_filters ::-webkit-scrollbar {
 	width: 10px;
@@ -790,6 +793,7 @@ ul.option-thumb {
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="template/js/lightboxed.js"></script>
 
 </head>
 <body id="detail">
@@ -910,15 +914,18 @@ if (isset($_POST['checkout_product_id']) && ! empty($_POST['checkout_product_id'
 								?>
 								<div class="swiper-slide pop-gallery swiper-slide-active"
 									data-swiper-slide-index="0" style="width: 440px; margin-right: 1px;">
-									<a href="<?=$home_pmk?>?showimg=1"><img data-idx="0" class="prod-img " data-id="img-0" alt="<?=$row98['image_title']?>"
-										data-ssrc="npad/<?=$row98['image_url']?>" src="npad/<?=$row98['image_url']?>">
-									</a>
+									<!-- <a href="<?=$row98['image_url']?>" itemprop="contentUrl" data-size="1200x600"> -->
+										<img data-idx="0" class="lightboxed prod-img " rel="group1" data-id="img-0" alt="<?=$row98['image_title']?>"
+										data-ssrc="npad/<?=$row98['image_url']?>" src="npad/<?=$row98['image_url']?>" data-link="npad/<?=$row98['image_url']?>">
+									<!-- </a> -->
 								</div>
 								<?php 
 								        }
 								    }
 								?>
 							</div>
+							<div id="carbon-block" style="margin:30px auto"></div>
+<div style="margin:30px auto"></div>
 <?php 
 $show_images = "0";
 if (isset($_GET['showimg']) && !empty($_GET['showimg'])) {
@@ -935,7 +942,7 @@ if ($show_images == "1") {
         height: 500,
         hide: { effect: "blind", duration: 500 }
      });
-  } );
+  });
   </script>
 <div id="dialog_images" title="" align="center" style="margin-top: 30px;">
   <p>Sản Phẩm đã được thêm vào Giỏ Hàng.</p>
@@ -955,9 +962,9 @@ if ($show_images == "1") {
 						</div>
 						<div class="row-viewmore-thumb">
 							<div class="col-viewmore-item pop1 gallery">
-								<img class="lazy-img lazy-loaded"
-									alt="<?=$imagetitle?>" data-ssrc="npad/<?=$imageurl?>" src="npad/<?=$imageurl?>">
-									<div class="over-gallery">Xem <?=$imageCount?> hình</div>
+								<!-- <img class="lightboxed lazy-img lazy-loaded"
+									alt="<?=$imagetitle?>" data-ssrc="npad/<?=$imageurl?>" rel="group2" src="npad/<?=$imageurl?>"  data-link="npad/<?=$imageurl?>"> -->
+									<div class="over-gallery" id="show-light-box">Xem <?=$imageCount?> hình</div>
 							</div>
 							<div class="col-viewmore-item special" style="cursor: pointer;">
 								<div class="icon-spec">
@@ -1009,6 +1016,9 @@ if ($show_images == "1") {
 
 					<!-- images -->
 					<script language="JavaScript" type="text/javascript">
+						$("#show-light-box").click(function(){
+						  	$('img[rel=group1]').first().click();
+						});
                         function change_qty_detail(id, step) {
                             var $txt = $('#' + id);
                             var min = parseInt($txt.attr('min'));
