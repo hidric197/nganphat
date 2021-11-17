@@ -108,7 +108,7 @@ $n = 1;
 
 </style>
 <div class="ac_wrapper"
-	style="position: relative; padding-bottom: 30px;">
+	style="position: relative; padding-bottom: 30px; z-index: 1;">
 	<ul class="ac_list" style="max-height: 360px; overflow: auto;">
   <div class="trend-catalog wrap-catalog-main">
 	<div class="trend-catalog-title">

@@ -133,6 +133,8 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
     include '_groupcontent_search_slug.php';
 } else if ($home_pmk == 'flash-sale'){
     include '_groupcontent_flashsale_slug.php';
+} else if ($home_pmk == 'khuyen-mai'){
+    include '_groupcontent_promotion_slug.php';
 } else if ($home_level_group == 0) {
     include '_groupcontent1_slug.php';
 } else if ($home_level_group == 1) {
@@ -186,7 +188,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 					<?php 
 					if ($home_table_name != Common::$_TABLE_NP_PROD_BRAND 
 					       && $home_table_name != Common::$_TABLE_NP_PROD_TAG
-					           && $home_pmk != 'tim-kiem' && $home_pmk != 'flash-sale' ) {
+					           && $home_pmk != 'tim-kiem' && $home_pmk != 'flash-sale' && $home_pmk != 'khuyen-mai') {
 					
 					?>
 						<ul
@@ -296,17 +298,19 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
             		        // Search
             		        if ($home_pmk == 'flash-sale') {
             		            $sql .= " WHERE  A.	product_flash_sale = '1' ";
-            		   } 
+            		   } else if ($home_pmk == 'khuyen-mai'){
+            		   		$sql .= " WHERE  A.	product_down_price > 0 ";
+            		   }
         		        
         		        // click Filter brand checkbook
-        		        if (isset($_POST['filter_brand']) && !empty($_POST['filter_brand'])) {
-        		            $filter_brand = $_POST['filter_brand'];
+        		        if (isset($_GET['filter_brand']) && !empty($_GET['filter_brand'])) {
+        		            $filter_brand = $_GET['filter_brand'];
         		            $sql .= " AND A.brand_id = '" .$filter_brand. "' ";
         		        }
                 		
                 		// click filter price checkbook
-                		if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
-                		    $filter_price = $_POST['filter_price'];
+                		if (isset($_GET['filter_price']) && !empty($_GET['filter_price'])) {
+                		    $filter_price = $_GET['filter_price'];
                 		    if ($filter_price == '01') {
                 		        $sql .= " AND A.product_sell_price < 100000 ";
                 		    } else if ($filter_price == '02') {
@@ -314,17 +318,13 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
                 		    } else if ($filter_price == '03') {
                 		        $sql .= " AND A.product_sell_price BETWEEN 500000 AND 1000000";
                 		    } else if ($filter_price == '04') {
-                		        $sql .= " AND A.product_sell_price >= 1000000 ";
-                		        $sql .= " AND A.product_sell_price < 2000000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 1000000 AND 2000000";
                 		    } else if ($filter_price == '05') {
-                		        $sql .= " AND A.product_sell_price >= 2000000 ";
-                		        $sql .= " AND A.product_sell_price < 5000000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 2000000 AND 5000000";
                 		    } else if ($filter_price == '06') {
-                		        $sql .= " AND A.product_sell_price >= 5000000 ";
-                		        $sql .= " AND A.product_sell_price < 10000000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 5000000 AND 10000000 ";
                 		    } else if ($filter_price == '07') {
-                		        $sql .= " AND A.product_sell_price >= 10000000 ";
-                		        $sql .= " AND A.product_sell_price < 20000000 ";
+                		        $sql .= " AND A.product_sell_price BETWEEN 10000000 AND 20000000";
                 		    } else if ($filter_price == '08') {
                 		        $sql .= " AND A.product_sell_price >= 20000000 ";
                 		    }

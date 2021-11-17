@@ -16,7 +16,9 @@
 
 <link type="text/css" rel="stylesheet"
 	href="template/css/lightboxed.css">
-
+<link rel="stylesheet" type="text/css" href="template/css/swiper-bundle.min.css">
+<link rel="stylesheet" media="all" type="text/css" href="template/css/style-home.min.css">
+<link rel="stylesheet" media="all" type="text/css" href="template/css/header-home.min.css">
 <style>
 #_filters ::-webkit-scrollbar {
 	width: 10px;

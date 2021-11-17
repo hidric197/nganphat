@@ -3318,7 +3318,7 @@ li.item-service-note {
 	max-width: 100%
 }
 
-.prod-hl-discount {
+/*.prod-hl-discount {
 	position: absolute;
 	right: 6px;
 	top: 6px;
@@ -3331,7 +3331,7 @@ li.item-service-note {
 	line-height: 23px;
 	color: #fff;
 	text-align: center
-}
+}*/
 
 .prod-hl-name {
 	margin: 10px 0;

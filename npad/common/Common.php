@@ -1,7 +1,7 @@
 <?php
 class Common {
-    static $_HOME_PAGE = "http://nganphat.ttcjsc.vn/";
-//     static $_HOME_PAGE = "http://localhost/nganphat";
+    // static $_HOME_PAGE = "http://nganphat.ttcjsc.vn/";
+    static $_HOME_PAGE = "http://localhost/nganphat";
     
     static $_MAIL_SERVER_ADDRESS = 'hien.works';
     static $_MAIL_SERVER_USER = 'mail@hien.works';

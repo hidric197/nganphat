@@ -1587,7 +1587,7 @@ li.cart-promo-suggest {
         position: relative;
     }
 
-.prod-hl-discount {
+/*.prod-hl-discount {
     position: absolute;
     right: 6px;
     top: 6px;
@@ -1600,7 +1600,7 @@ li.cart-promo-suggest {
     line-height: 23px;
     color: #fff;
     text-align: center;
-}
+}*/
 
 .product-short-desc {
     display: none;

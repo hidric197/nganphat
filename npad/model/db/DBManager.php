@@ -9,8 +9,8 @@ class DBManager
 //         $dbname = 'nganphatdb';
         
         $dbadress = 'localhost';
-        $dbuser = 'nganphat_user';
-        $dbpass = 'JB:s?+qT:xBMP^,W9=0';
+        $dbuser = 'root';
+        $dbpass = '';
         $dbname = 'nganphat_db';
 
         $conn = mysqli_connect($dbadress, $dbuser, $dbpass, $dbname);

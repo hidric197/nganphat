@@ -73,6 +73,12 @@ if (isset($_REQUEST['pmk']) && ! empty($_REQUEST['pmk'])) {
         } else {
             include '_groupcontent_mb.php';
         }
+    } else if ($home_pmk == 'khuyen-mai') {
+        if ($isMobile == 'False') {
+            include '_groupcontent.php';
+        } else {
+            include '_groupcontent_mb.php';
+        }
     } else {        
         $home_estr_pmk = $conn->real_escape_string($home_pmk);
         $sql = "SELECT data_id, permalink, data_table FROM np_permalink ";

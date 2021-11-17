@@ -1,13 +1,13 @@
-<form action="" method="post" name="form_filter_brand" id="form_filter_brand">
+<form action="" method="get" name="form_filter_brand" id="form_filter_brand">
 <?php 
 $filter_brand = '';
-if (isset($_POST['filter_brand']) && !empty($_POST['filter_brand'])) {
-    $filter_brand = $_POST['filter_brand'];
+if (isset($_GET['filter_brand']) && !empty($_GET['filter_brand'])) {
+    $filter_brand = $_GET['filter_brand'];
 }
 
 $filter_price = '';
-if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
-    $filter_price = $_POST['filter_price'];
+if (isset($_GET['filter_price']) && !empty($_GET['filter_price'])) {
+    $filter_price = $_GET['filter_price'];
 }
 ?>
 <div class="body-left-box filter-brand">
@@ -42,7 +42,12 @@ if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
 </form>
 <script language="JavaScript" type="text/javascript">
 	function submitFormFilterBrand(brandId) {
-		document.getElementById("filter_brand").value = brandId;
-		document.getElementById("form_filter_brand").submit();
+		const params = new URLSearchParams(window.location.search)
+		let url = "?filter_brand=" + brandId
+		if (params.has('filter_price')) {
+			url = "?filter_brand="+ brandId + "&filter_price=" + params.get('filter_price')
+		}
+		location.href = url
+		// document.getElementById("form_filter_brand").submit();
 	}	
 </script>

@@ -111,7 +111,7 @@ a.link_group:hover {
 		<div class="wrap">
 			<div class="box-navi-inner ">
 				<span class="title-khuyen-mai">
-                	<a href="#" title="Bấm vào đây để xem danh sách khuyến mại">Khuyến mại</a>
+                	<a href="/khuyen-mai" title="Bấm vào đây để xem danh sách khuyến mại">Khuyến mại</a>
            	 	</span>
 
 				<div class="rslides rslides1" id="rslides">

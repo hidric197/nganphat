@@ -18,6 +18,10 @@
 <!-- <link rel="stylesheet" media="all" type="text/css" href="template/css/binhluan-hotro.min.css"> -->
 <link rel="stylesheet" media="all" type="text/css"
 	href="template/css/checkout-beta.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
 .top-banner ~ #menu-container .block.button-home-nav, .top-banner ~
@@ -322,12 +326,14 @@
 													<div class="product-checkout-item-del">
 														<span style="cursor: pointer" title="Xoá <?=$rowCo['product_name']?> khỏi giỏ hàng?" 
 															class="lnk-cart-item-rem">
-															<i class="fa fa-trash-o" onclick="delProdOnCart('<?=$productId?>');"></i>
+															<i class="fa fa-trash-o" onclick="delProdOnCart('<?=$productId?>');" id="myModal" data-toggle="modal" data-target="#exampleModal"></i>
 														</span>
 													</div>
 													<div class="product-checkout-item-sum">
 														<?=Common::convertMoney($rowCo['product_sell_price'])?>
 													</div>
+													<!-- Modal -->
+													
 												</div>
 											</li>
 										
@@ -339,6 +345,33 @@
 										</ul>
 										<input type="hidden" name="del_prod_id" id="del_prod_id" value="">
 										<script language="JavaScript" type="text/javascript">
+											function delProdOnCart(id) {
+												$('<div></div>').appendTo('body')
+												    .html('<div><h6>Bạn có chắc chắn thực hiện hành động này?</h6></div>')
+												    .dialog({
+												      modal: true,
+												      title: 'Cảnh báo',
+												      zIndex: 10000,
+												      autoOpen: true,
+												      width: 'auto',
+												      resizable: false,
+												      buttons: {
+												        "Xác nhận": function() {
+												          	document.getElementById("del_prod_id").value = id;
+															document.getElementById("checkout_form").submit();
+												          	$(this).dialog("close");
+												        },
+												        "Hủy": function() {
+												          	$(this).dialog("close");
+												        }
+												      },
+												      close: function(event, ui) {
+												        $(this).remove();
+												      }
+												    });
+											  	$('#myInput').trigger('focus')
+											}
+
                                             function change_qty_detail(id, step) {
                                                 var $txt = $('#' + id);
                                                 var min = parseInt($txt.attr('min'));
@@ -350,11 +383,6 @@
                                                 $txt.val(number > 1 ? number : 1);
                                                 $txt.trigger('modified');
                                                 return false;
-                                            }
-                                            
-                                            function delProdOnCart(prodId) {
-                                            	document.getElementById("del_prod_id").value = prodId;
-												document.getElementById("checkout_form").submit();
                                             }
                                          </script>
 										<div class="product-checkout-sumary">
@@ -376,6 +404,7 @@
 										</div>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 
@@ -433,7 +462,25 @@
 			</div>
 		</form>
 		
-		
+		<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		      <span aria-hidden="true">&times;</span>
+		    </button>
+		  </div>
+		  <div class="modal-body">
+		    ...
+		  </div>
+		  <div class="modal-footer">
+		    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		    <button type="button" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+		</div>
+		</div> -->
 			
 	</section>
 

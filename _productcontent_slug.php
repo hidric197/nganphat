@@ -29,6 +29,7 @@
 			href="<?=$pmk_group?>" title="<?=$name_group?>"><?=$name_group?></a>
 			<i class="fa fa-angle-right"></i>  
 <?php
+	$sql1 = "";
     if ($home_group_type == '1') {
 	    $sql1 = "SELECT D.permalink, A.group_id, A.group_name ";
 	    $sql1 .= " FROM np_prod_group A ";
@@ -44,9 +45,10 @@
 	    $sql1 .= " FROM np_prod_group A ";
 	    $sql1 .= " INNER JOIN np_permalink D ON A.data_id = D.data_id ";
 	    $sql1 .= " WHERE A.group_type = '3' AND A.group_level = '1' AND A.delete_flag = '0'";
-	} 
-	$result10 = $conn->query($sql1);
-	if ($result10->num_rows > 0) {
+	}
+
+	$result10 = !empty($sql1) ? $conn->query($sql1) : "";
+	if ($result10 && $result10->num_rows > 0) {
 ?>
 	<div class="breadcrum-cat-menu parent">
 		<ul>

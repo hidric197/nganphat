@@ -10,6 +10,9 @@
 	href="template/css/header-home.min.css">
 <link type="text/css" rel="stylesheet"
 	href="template/css/details-theme.css" />
+<link rel="stylesheet" media="all" type="text/css" href="template/css/np.css">
+<link rel="stylesheet" media="all" type="text/css" href="template/css/style-home.min.css">
+<link rel="stylesheet" media="all" type="text/css" href="template/css/header-home.min.css">
 </head>
 <body id="detail">
 <?php 

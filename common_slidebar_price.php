@@ -1,13 +1,13 @@
-<form action="" method="post" name="form_filter_price" id="form_filter_price">
+<form action="" method="GET" name="form_filter_price" id="form_filter_price">
 <?php 
 $filter_brand = '';
-if (isset($_POST['filter_brand']) && !empty($_POST['filter_brand'])) {
-    $filter_brand = $_POST['filter_brand'];
+if (isset($_GET['filter_brand']) && !empty($_GET['filter_brand'])) {
+    $filter_brand = $_GET['filter_brand'];
 }
 
 $filter_price = '';
-if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
-    $filter_price = $_POST['filter_price'];
+if (isset($_GET['filter_price']) && !empty($_GET['filter_price'])) {
+    $filter_price = $_GET['filter_price'];
 }
 ?>
 <div class="body-left-box filter-price">
@@ -81,12 +81,18 @@ if (isset($_POST['filter_price']) && !empty($_POST['filter_price'])) {
 		</ul>
 	</div>
 </div>
-	<input type="hidden" name="filter_price" id="filter_price" value="<?=$filter_price?>">
-	<input type="hidden" name="filter_brand" value="<?=$filter_brand?>">
+	<!-- <input type="hidden" name="filter_price" id="filter_price" value="<?=$filter_price?>">
+	<input type="hidden" name="filter_brand" value="<?=$filter_brand?>"> -->
 </form>
 <script language="JavaScript" type="text/javascript">
 	function submitFormFilterPrice(priceId) {
-		document.getElementById("filter_price").value = priceId;
-		document.getElementById("form_filter_price").submit();
+		const params = new URLSearchParams(window.location.search)
+		let url = "?filter_price=" + priceId
+		if (params.has('filter_brand')) {
+			url = "?filter_brand="+ params.get('filter_brand') + "&filter_price=" + priceId
+		}
+		location.href = url
+		// document.getElementById("filter_price").value = priceId;
+		// document.getElementById("form_filter_price").submit();
 	}	
 </script>

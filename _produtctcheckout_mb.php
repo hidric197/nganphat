@@ -21,6 +21,10 @@
 	href="template/css/header-home.min.css">
 <link rel=stylesheet media=all type=text/css
 	href="template/css/np_mb.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body id="checkout">
 <?php
@@ -310,8 +314,30 @@
                                             }
                                             
                                             function delProdOnCart(prodId) {
-                                            	document.getElementById("del_prod_id").value = prodId;
-												document.getElementById("checkout_form").submit();
+                                            	$('<div></div>').appendTo('body')
+												    .html('<div><h6>Bạn có chắc chắn thực hiện hành động này?</h6></div>')
+												    .dialog({
+												      modal: true,
+												      title: 'Cảnh báo',
+												      zIndex: 10000,
+												      autoOpen: true,
+												      width: 'auto',
+												      resizable: false,
+												      buttons: {
+												        "Xác nhận": function() {
+												          	document.getElementById("del_prod_id").value = id;
+															document.getElementById("checkout_form").submit();
+												          	$(this).dialog("close");
+												        },
+												        "Hủy": function() {
+												          	$(this).dialog("close");
+												        }
+												      },
+												      close: function(event, ui) {
+												        $(this).remove();
+												      }
+												    });
+											  	$('#myInput').trigger('focus')
                                             }
                                          </script>
 										<div class="product-checkout-sumary">

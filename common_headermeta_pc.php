@@ -62,6 +62,7 @@ if (isset($_REQUEST['pmk']) && ! empty($_REQUEST['pmk'])) {
 <!-- / Yoast SEO plugin. -->
 <link rel="shortcut icon"
 	href="<?=Common::$_HOME_PAGE?>/template/images/favicon.ico">
+	
 
 <script language="JavaScript" type="text/javascript">
 (function(n){
