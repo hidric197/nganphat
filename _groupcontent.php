@@ -195,7 +195,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 							class="list-catalog-main">
 							<?php
 							if ($home_table_name == Common::$_TABLE_NP_PROD_GROUP) {
-    							$sqlGroup = "SELECT B.permalink, A.group_id, A.group_name, A.image_title, A.image_url ";
+    							$sqlGroup = "SELECT B.permalink, A.group_id, A.group_name, A.image_title, A.image_url, A.group_description ";
     							$sqlGroup .= " FROM np_prod_group A ";
     							$sqlGroup .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
     							$sqlGroup .= " WHERE A.delete_flag = '0' ";
@@ -216,7 +216,6 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 							    $sqlGroup .= " WHERE A.delete_flag = '0' ";
 							    $sqlGroup .= " AND filter_id_up = '$home_prod_filter_id' ";
 							}
-                    		
                     		$result1 = $conn->query($sqlGroup);
                     		if ($result1->num_rows > 0) {
                     		    while ($row1 = $result1->fetch_assoc()) {
@@ -250,6 +249,8 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 					
 					<!-- ================================= -->
         				<?php 
+        				$group_description = "SELECT group_description FROM np_prod_group WHERE group_name = '$name_group'";
+                		$group_description = $conn->query($group_description)->fetch_assoc();
                 		$sql = "SELECT B.permalink AS prd_permalink, B.data_table";
                 		$sql .= ", A.product_id, A.product_name, A.product_code ";
                 		$sql .= " , A.product_old_price, A.product_down_price, A.product_sell_price ";
@@ -380,6 +381,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
                         // =======================paging ============================
                         
                 		$result10 = $conn->query($sql);
+                		
                 		if ($result10->num_rows > 0) {
 
                 ?>
@@ -389,6 +391,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 								<h1 class="cat-xeo-desc"><?=$name_group?></h1>
 								<span>&nbsp;</span><span class="cat-xeo-number">(<?=$totalRecord?> sản phẩm)</span>
 							</div>
+							<div><?= $group_description['group_description'] ?></div>
 						</div>
 						<div class="bar-sort-product">
 							<div class="bar-sort-left">

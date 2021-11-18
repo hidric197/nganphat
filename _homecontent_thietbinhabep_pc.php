@@ -72,7 +72,7 @@
 			?>
     				<li class="product-highlight-item prod-item">
     				<?php 
-					   if ($row['product_down_price'] != '0') {
+					   if ($row['product_down_price'] > 0) {
     				?>
     				<div
     					class="prod-hl-discount">
@@ -170,7 +170,7 @@
         		?>
 				<li class="product-highlight-item prod-item " data-pid="70936">
 					<?php 
-					   if ($row['product_down_price'] != '0') {
+					   if ($row['product_down_price'] > 0) {
     				?>
 					<div
 						class="prod-hl-discount">

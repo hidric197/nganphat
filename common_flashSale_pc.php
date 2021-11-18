@@ -43,7 +43,7 @@ if ($flashsaleproduct_result->num_rows > 0) {
 				<li class="product-highlight-item prod-item  _list_ico_6216"
 					data-pid="9833">
 					<?php 
-					   if ($row['product_down_price'] != '0') {
+					   if ($row['product_down_price'] > 0) {
     				?>
 					<div class="prod-hl-discount">
 						<span>-<?=$row['product_down_price']?>%</span>

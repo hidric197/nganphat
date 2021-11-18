@@ -44,7 +44,7 @@ if ($flashsaleproduct_result->num_rows > 0) {
 					data-pid="58135">
 					
 					<?php 
-					   if ($row['product_down_price'] != '0') {
+					   if ($row['product_down_price'] > 0) {
     				?>
 					<div class="prod-hl-discount">
 						<span>-<?=$row['product_down_price']?>%</span>

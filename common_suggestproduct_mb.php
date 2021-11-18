@@ -51,7 +51,7 @@
     		
 			<li class="product-highlight-item prod-item" data-pid="48610">
 				<?php 
-				    if ($row['product_down_price'] != '0') {
+				    if ($row['product_down_price'] > 0) {
     			?>
 				<div
 					class="prod-hl-discount">

@@ -8,7 +8,7 @@ $permalinkValue = '';
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
 <div class="row">
 	<ol class="breadcrumb">
@@ -427,8 +427,13 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
 ?>
 
 <script>
-	CKEDITOR.replace( 'editor' , {
-		height: 300,
+	CKEDITOR.replace( 'group_description' , {
+		height: 200,
+    	filebrowserUploadUrl: 'ckUpload.php'
+	} );
+
+	CKEDITOR.replace('group_seo' , {
+		height: 250,
     	filebrowserUploadUrl: 'ckUpload.php'
 	} );
 </script>

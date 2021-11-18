@@ -842,6 +842,7 @@ if (isset($_POST['checkout_product_id']) && ! empty($_POST['checkout_product_id'
 		<?php include '_productcontent_slug.php';?>
 			</div>
      <?php
+
         $sql100 = "SELECT * ";
         $sql100 .= " FROM np_product A ";
         $sql100 .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
@@ -1376,18 +1377,18 @@ span.among-buy {
 							?>
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Kích thước:</span>
-								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=$row100['product_size']?></span>
+								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_size'])?></span>
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Màu sắc:</span>
-								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=$row100['product_color']?></span>
+								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?= strip_tags($row100['product_color'])?></span>
 
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Chất liệu:</span>
-								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=$row100['product_material']?></span>
+								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_material'])?></span>
 							</div>
 
 							<div class="detail-info-spec status">
