@@ -1377,18 +1377,23 @@ span.among-buy {
 							?>
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Kích thước:</span>
+								<?php if(trim($row100['product_size'])){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_size'])?></span>
+								<?php } ?>
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Màu sắc:</span>
+								<?php if(trim($row100['product_color'])){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?= strip_tags($row100['product_color'])?></span>
-
+								<?php } ?>
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Chất liệu:</span>
+								<?php if(trim($row100['product_material'])){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_material'])?></span>
+								<?php } ?>
 							</div>
 
 							<div class="detail-info-spec status">
@@ -1623,6 +1628,32 @@ if ($add_cart_value == "1") {
 			</div>
 			<article class="show-content-main">
 				<?=$row100['product_detail']?>
+				<div class="title-specs">
+					<h2>Sản phẩm cùng nhóm</h2>
+				</div>
+				<?php 
+					$group_product_item_sql = "SELECT product_id, product_name, product_old_price, product_sell_price FROM np_product  WHERE group_id = $home_group_id AND delete_flag = 0 LIMIT 6";
+					$group_product_item = $conn->query($group_product_item_sql);
+				?>
+				<div class="container-group-product">
+					<?php while ($data_row = $group_product_item->fetch_assoc()) { ?>
+					<div class="border-custom" id="group-product-<?= $data_row['product_id'] ?>" onclick="clickItem(<?= $data_row['product_id'] ?>)">
+						<div class="box-group-product">
+							<input id="radio-<?= $data_row['product_id'] ?>" class="radio-group-product" type="radio" name="group_product" value="<?= $data_row['product_id'] ?>"> 
+							<label for="group_product">&nbsp;<?= $data_row['product_name'] ?></label>
+						</div>
+						<h2><?= number_format($data_row['product_sell_price'], 0) ?> đ</h2>
+						<?php if($data_row['product_sell_price'] < $data_row['product_old_price']) { ?> 
+						<p><s><?= number_format($data_row['product_old_price'], 0) ?> đ</s></p>
+						<?php } ?>
+					</div>
+					<?php } ?>
+				</div>
+				<script type="text/javascript">
+					function clickItem(product_id){
+						document.getElementById("radio-" + product_id).checked = true;
+					}
+				</script>
 			</article>
 			<?php 
 			     if (! empty($row100['product_video'])){

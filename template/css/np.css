@@ -6264,3 +6264,34 @@ span.among-buy {
 		left: 8px;
 	}
 }
+
+.container-group-product {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.box-group-product {
+	display: inline-flex;
+}
+.border-custom {
+	border: dotted 1px black;
+	border-radius: 5px;
+	-webkit-box-flex: 0;
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+	text-align: center;
+	margin: 5px;
+	padding: 5px;
+}
+.border-custom label {
+	margin-top: -5px;
+}
+.radio-group-product {
+	display: block !important;
+}

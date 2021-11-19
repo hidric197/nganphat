@@ -249,8 +249,8 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 					
 					<!-- ================================= -->
         				<?php 
-        				$group_description = "SELECT group_description FROM np_prod_group WHERE group_name = '$name_group'";
-                		$group_description = $conn->query($group_description)->fetch_assoc();
+        				$group_product_sql = "SELECT group_description FROM np_prod_group WHERE group_name = '$name_group' AND group_menu_display = 1";
+                		$group_description = $conn->query($group_product_sql)->fetch_assoc();
                 		$sql = "SELECT B.permalink AS prd_permalink, B.data_table";
                 		$sql .= ", A.product_id, A.product_name, A.product_code ";
                 		$sql .= " , A.product_old_price, A.product_down_price, A.product_sell_price ";
@@ -391,7 +391,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 								<h1 class="cat-xeo-desc"><?=$name_group?></h1>
 								<span>&nbsp;</span><span class="cat-xeo-number">(<?=$totalRecord?> sản phẩm)</span>
 							</div>
-							<div><?= $group_description['group_description'] ?></div>
+							<div><?= $group_description ? $group_description['group_description'] : '' ?></div>
 						</div>
 						<div class="bar-sort-product">
 							<div class="bar-sort-left">
