@@ -1,13 +1,19 @@
 <?php
 class Common {
-    // static $_HOME_PAGE = "http://nganphat.ttcjsc.vn/";
-    static $_HOME_PAGE = "http://localhost/nganphat";
+    static $_HOME_PAGE = "http://nganphat.ttcjsc.vn/";
+//     static $_HOME_PAGE = "http://localhost/nganphat";
     
-    static $_MAIL_SERVER_ADDRESS = 'hien.works';
-    static $_MAIL_SERVER_USER = 'mail@hien.works';
-    static $_MAIL_SERVER_PASS = 'Khang@0604';
-    static $_MAIL_SERVER_EMAIL_DISPLAY = 'NGÂN PHÁT';
-    
+//    static $_MAIL_SERVER_ADDRESS = 'hien.works';
+//    static $_MAIL_SERVER_ADDRESS = 'smtp.gmail.com';
+//    static $_MAIL_SERVER_USER = 'mail@hien.works';
+//    static $_MAIL_SERVER_PASS = 'Khang@0604';
+//    static $_MAIL_SERVER_EMAIL_DISPLAY = 'NGÃ‚N PHÃT';
+ 
+    static $_MAIL_SERVER_ADDRESS = 'smtp.office365.com';
+    static $_MAIL_SERVER_USER = 'nganphat_test@ttcjsc.vn';
+    static $_MAIL_SERVER_PASS = 'Qwer@7890#!';
+    static $_MAIL_SERVER_EMAIL_DISPLAY = 'NGÃ‚N PHÃT';
+
     static $_NP_MAIL = 'nganphat.ltd@gmail.com';
 //     static $_NP_MAIL = 'hien2010@gmail.com';
     /**
@@ -22,7 +28,7 @@ class Common {
         $mail->Password = 'Khang@0604'; // password
 
         // Sender and recipient settings
-        $mail->setFrom('mail@hien.works', 'NGÂN PHÁT');
+        $mail->setFrom('mail@hien.works', 'NGÃ‚N PHÃT');
      */
     
     static $_TABLE_NP_PROD = "np_product";
@@ -82,22 +88,22 @@ class Common {
         $map = array();
         $quotedReplacement = preg_quote($replacement, '/');
         $default = array(
-            '/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ|À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ|å/' => 'a',
-            '/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ|È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ|ë/' => 'e',
-            '/ì|í|ị|ỉ|ĩ|Ì|Í|Ị|Ỉ|Ĩ|î/' => 'i',
-            '/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ|Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ|ø/' => 'o',
-            '/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ|Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ|ů|û/' => 'u',
-            '/ỳ|ý|ỵ|ỷ|ỹ|Ỳ|Ý|Ỵ|Ỷ|Ỹ/' => 'y',
-            '/đ|Đ/' => 'd',
-            '/ç/' => 'c',
-            '/ñ/' => 'n',
-            '/ä|æ/' => 'ae',
-            '/ö/' => 'oe',
-            '/ü/' => 'ue',
-            '/Ä/' => 'Ae',
-            '/Ü/' => 'Ue',
-            '/Ö/' => 'Oe',
-            '/ß/' => 'ss',
+            '/Ã |Ã¡|áº¡|áº£|Ã£|Ã¢|áº§|áº¥|áº­|áº©|áº«|Äƒ|áº±|áº¯|áº·|áº³|áºµ|Ã€|Ã|áº |áº¢|Ãƒ|Ã‚|áº¦|áº¤|áº¬|áº¨|áºª|Ä‚|áº°|áº®|áº¶|áº²|áº´|Ã¥/' => 'a',
+            '/Ã¨|Ã©|áº¹|áº»|áº½|Ãª|á»|áº¿|á»‡|á»ƒ|á»…|Ãˆ|Ã‰|áº¸|áºº|áº¼|ÃŠ|á»€|áº¾|á»†|á»‚|á»„|Ã«/' => 'e',
+            '/Ã¬|Ã­|á»‹|á»‰|Ä©|ÃŒ|Ã|á»Š|á»ˆ|Ä¨|Ã®/' => 'i',
+            '/Ã²|Ã³|á»|á»|Ãµ|Ã´|á»“|á»‘|á»™|á»•|á»—|Æ¡|á»|á»›|á»£|á»Ÿ|á»¡|Ã’|Ã“|á»Œ|á»Ž|Ã•|Ã”|á»’|á»|á»˜|á»”|á»–|Æ |á»œ|á»š|á»¢|á»ž|á» |Ã¸/' => 'o',
+            '/Ã¹|Ãº|á»¥|á»§|Å©|Æ°|á»«|á»©|á»±|á»­|á»¯|Ã™|Ãš|á»¤|á»¦|Å¨|Æ¯|á»ª|á»¨|á»°|á»¬|á»®|Å¯|Ã»/' => 'u',
+            '/á»³|Ã½|á»µ|á»·|á»¹|á»²|Ã|á»´|á»¶|á»¸/' => 'y',
+            '/Ä‘|Ä/' => 'd',
+            '/Ã§/' => 'c',
+            '/Ã±/' => 'n',
+            '/Ã¤|Ã¦/' => 'ae',
+            '/Ã¶/' => 'oe',
+            '/Ã¼/' => 'ue',
+            '/Ã„/' => 'Ae',
+            '/Ãœ/' => 'Ue',
+            '/Ã–/' => 'Oe',
+            '/ÃŸ/' => 'ss',
             '/[^\s\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]/mu' => ' ',
             '/\\s+/' => $replacement,
             sprintf('/^[%s]+|[%s]+$/', $quotedReplacement, $quotedReplacement) => '',
@@ -109,28 +115,28 @@ class Common {
     }
     
     static function stripVN($str) {
-        $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
-        $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
-        $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
-        $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
-        $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
-        $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
-        $str = preg_replace("/(đ)/", 'd', $str);
-        $str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
-        $str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
-        $str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
-        $str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
-        $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
-        $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
-        $str = preg_replace("/(Đ)/", 'D', $str);
+        $str = preg_replace("/(Ã |Ã¡|áº¡|áº£|Ã£|Ã¢|áº§|áº¥|áº­|áº©|áº«|Äƒ|áº±|áº¯|áº·|áº³|áºµ)/", 'a', $str);
+        $str = preg_replace("/(Ã¨|Ã©|áº¹|áº»|áº½|Ãª|á»|áº¿|á»‡|á»ƒ|á»…)/", 'e', $str);
+        $str = preg_replace("/(Ã¬|Ã­|á»‹|á»‰|Ä©)/", 'i', $str);
+        $str = preg_replace("/(Ã²|Ã³|á»|á»|Ãµ|Ã´|á»“|á»‘|á»™|á»•|á»—|Æ¡|á»|á»›|á»£|á»Ÿ|á»¡)/", 'o', $str);
+        $str = preg_replace("/(Ã¹|Ãº|á»¥|á»§|Å©|Æ°|á»«|á»©|á»±|á»­|á»¯)/", 'u', $str);
+        $str = preg_replace("/(á»³|Ã½|á»µ|á»·|á»¹)/", 'y', $str);
+        $str = preg_replace("/(Ä‘)/", 'd', $str);
+        $str = preg_replace("/(Ã€|Ã|áº |áº¢|Ãƒ|Ã‚|áº¦|áº¤|áº¬|áº¨|áºª|Ä‚|áº°|áº®|áº¶|áº²|áº´)/", 'A', $str);
+        $str = preg_replace("/(Ãˆ|Ã‰|áº¸|áºº|áº¼|ÃŠ|á»€|áº¾|á»†|á»‚|á»„)/", 'E', $str);
+        $str = preg_replace("/(ÃŒ|Ã|á»Š|á»ˆ|Ä¨)/", 'I', $str);
+        $str = preg_replace("/(Ã’|Ã“|á»Œ|á»Ž|Ã•|Ã”|á»’|á»|á»˜|á»”|á»–|Æ |á»œ|á»š|á»¢|á»ž|á» )/", 'O', $str);
+        $str = preg_replace("/(Ã™|Ãš|á»¤|á»¦|Å¨|Æ¯|á»ª|á»¨|á»°|á»¬|á»®)/", 'U', $str);
+        $str = preg_replace("/(á»²|Ã|á»´|á»¶|á»¸)/", 'Y', $str);
+        $str = preg_replace("/(Ä)/", 'D', $str);
         return $str;
     }
     
     static function convertMoney($str) {
         if (is_numeric($str)) {
-            return number_format($str) . ' đ';
+            return number_format($str) . ' Ä‘';
         } else {
-//             return number_format(0) . ' đ';
+//             return number_format(0) . ' Ä‘';
             return $str;
         }
     }

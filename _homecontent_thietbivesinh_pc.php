@@ -155,6 +155,7 @@
         		$sql .= " LEFT OUTER JOIN np_prod_vote F ON A.product_id = F.product_id ";
         		$sql .= " WHERE  P.group_type = '" .Common::$_GROUP_THIET_BI_VE_SINH_TYPE. "' ";
         		$sql .= " AND  A.delete_flag = '0' ";
+        		$sql .= " GROUP BY A.product_id ";
         		$sql .= " ORDER BY A.product_count_view DESC ";
         		$sql .= " Limit 5 ";
         		

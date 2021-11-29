@@ -3,8 +3,15 @@
 <head>
 <?php
     include 'common_headermeta_pc.php';
+
+    $meta_sql = "SELECT p.product_seo FROM np_product as p WHERE p.data_id = (SELECT pl.data_id FROM np_permalink as pl WHERE pl.permalink = '".$home_estr_pmk."')";
+    $meta_tag = $conn->query($meta_sql);$meta_tag->fetch_assoc();
+    foreach($meta_tag as $meta){
+    	echo $meta['product_seo'];
+    }
 ?>
 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="template/css/np.css">
 	
@@ -19,6 +26,10 @@
 <link rel="stylesheet" type="text/css" href="template/css/swiper-bundle.min.css">
 <link rel="stylesheet" media="all" type="text/css" href="template/css/style-home.min.css">
 <link rel="stylesheet" media="all" type="text/css" href="template/css/header-home.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <style>
 #_filters ::-webkit-scrollbar {
 	width: 10px;
@@ -790,13 +801,20 @@ ul.option-thumb {
 }
 </style>
 
-
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="template/js/lightboxed.js"></script>
-
+<script>
+	$(document).ready(function(){
+		$(".icon-home").hover(function(){
+			$("#detail .menu-box").addClass('show-box')
+		})
+		$(".icon-home").mouseout(function(){
+			$("#detail .menu-box").removeClass('show-box')
+		})
+	})
+</script>
 </head>
 <body id="detail">
 <?php 
@@ -965,8 +983,8 @@ if ($show_images == "1") {
 						</div>
 						<div class="row-viewmore-thumb">
 							<div class="col-viewmore-item pop1 gallery">
-								<!-- <img class="lightboxed lazy-img lazy-loaded"
-									alt="<?=$imagetitle?>" data-ssrc="npad/<?=$imageurl?>" rel="group2" src="npad/<?=$imageurl?>"  data-link="npad/<?=$imageurl?>"> -->
+								<img class="lightboxed lazy-img lazy-loaded"
+									alt="<?=$imagetitle?>" data-ssrc="npad/<?=$imageurl?>" src="npad/<?=$imageurl?>"  data-link="npad/<?=$imageurl?>">
 									<div class="over-gallery" id="show-light-box">Xem <?=$imageCount?> hình</div>
 							</div>
 							<div class="col-viewmore-item special" style="cursor: pointer;">
@@ -1135,7 +1153,7 @@ if ($show_images == "1") {
 						</div>
 
 					</div>
-					<div class="Product-info-right-top" style="margin-top: 96px;">
+					<div class="Product-info-right-top">
 						<div class="Product-summary">
 							<?php 
 							if ($row100['product_flash_sale'] == '0') {
@@ -1144,8 +1162,7 @@ if ($show_images == "1") {
     								<span class="info-spec-right"> <span id="p_price"
     									class="p-price"><?=Common::convertMoney($row100['product_sell_price'])?></span> <span
     									id="p_lprice" class="p-price-old"><?=Common::convertMoney($row100['product_old_price'])?></span>
-    									<span class="p-price-sale"
-    									title="<?=number_format($row100['product_down_price'])?>"><span>-<?=$row100['product_down_price']?> %</span>
+    									<span class="p-price-sale"><span style="color: red;"><b>-<?= 100 - round($row100['product_sell_price']/$row100['product_old_price'], 2)*100?> %</b></span>
     								</span>
     								</span>
     							</div>
@@ -1221,7 +1238,7 @@ if ($show_images == "1") {
 											<div class="fs-price">
 												<span>Giá Flash Sale </span><span><?=Common::convertMoney($row100['product_sell_price'])?></span>
 												<div class="sale-fs">
-													<span class="percent-fs">-<?=number_format($row100['product_down_price'])?>%</span><span
+													<span class="percent-fs">-<?= 100 - round($row100['product_sell_price']/$row100['product_old_price'], 2)*100?>%</span><span
 														class="old-price-fs"><?=Common::convertMoney($row100['product_old_price'])?></span>
 												</div>
 											</div>
@@ -1377,21 +1394,21 @@ span.among-buy {
 							?>
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Kích thước:</span>
-								<?php if(trim($row100['product_size'])){ ?>
+								<?php if(trim($row100['product_size'])!= ''){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_size'])?></span>
 								<?php } ?>
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Màu sắc:</span>
-								<?php if(trim($row100['product_color'])){ ?>
+								<?php if(trim($row100['product_color'])!= ''){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?= strip_tags($row100['product_color'])?></span>
 								<?php } ?>
 							</div>
 							
 							<div class="detail-info-spec status">
 								<span class="info-spec-left">Chất liệu:</span>
-								<?php if(trim($row100['product_material'])){ ?>
+								<?php if(trim($row100['product_material'])!= ''){ ?>
 								<span style="background-color: #ffcaca; border: 1px solid red; padding: 5px;"><?=strip_tags($row100['product_material'])?></span>
 								<?php } ?>
 							</div>
@@ -1450,7 +1467,7 @@ span.among-buy {
 								</a>
 							</div>
 							<div class="btn-supp-wrap supp-now">
-								<a class="btn-shopp-manual btn-supp" rel="nofollow" id="btn-supp-prod" onclick="supportSubmit()"> 
+								<a class="btn-shopp-manual btn-supp" rel="nofollow" id="btn-supp-prod" data-toggle="modal" data-target="#exampleModal"> 
 								<span class="icon-shopp icon-supp"></span> <span class="txt-shopp"> <span
 										class="txt-buy-now">Tư vấn</span>
 								</span>
@@ -1494,6 +1511,33 @@ if ($add_cart_value == "1") {
 <?php 
 }
 ?>
+					<!-- Tư vấn -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Điền thông tin</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      	<div class="modal-body">
+					        	Họ tên:<br>
+					        	<input class="form-control" type="text" size="19" name="mail_name" id="mail_name"><br>
+					        	Số điện thoại:<br>
+					        	<input class="form-control" type="text" size="19" name="mail_phone" id="mail_phone"><br>
+					        	Email liên hệ:<br>
+					        	<input class="form-control" type="text" size="19" name="mail_contact" id="mail_contact"><br>
+					        	Nội dung:<br> <textarea class="form-control" name="mail_content" rows="6" cols="20" id="mail_content"></textarea><br>
+						  		<div id="res_ajax">&nbsp;</div>
+						  	</div>
+					      	<div class="modal-footer">
+					        	<a class="btn btn-success" onclick="supportSubmit()">Gửi</a>
+					        	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close">Đóng</button>
+					      	</div>
+					    </div>
+					  </div>
+					</div>
 
 					<script type="text/javascript" lang="javascript">
     					function checkoutSubmit() {
@@ -1502,8 +1546,30 @@ if ($add_cart_value == "1") {
     					}
     					
     					function supportSubmit() {
-    						document.form_checkout_product.action = "mua-hang";
-    						document.getElementById("form_checkout_product").submit();
+    						var name = $('#mail_name').val();
+    						var phone = $('#mail_phone').val();
+    						var contact = $('#mail_contact').val();
+    						var content = $('#mail_content').val();
+    						var url = location.href;
+    						$('#res_ajax').children().remove();
+    						 $.ajax({
+						        url: "_sendMail.php",
+						        type: "post",
+						        data: {mail_name: name, mail_phone: phone, mail_contact:contact, mail_content: content, send_url: url} ,
+						        success: function (response) {
+						        	response = JSON.parse(response)
+						        	console.log(response.message)
+						        	$('#res_ajax').append(response.message)
+						        	if (response.status == 'success') {
+							        	setTimeout(function() {
+							        		$('#modal-close').click();
+							        	}, 1000);
+						        	}
+						        },
+						        error: function () {
+						        	$('#res_ajax').append("<span style='color: red'>* Có lỗi xảy ra. Vui lòng thử lại.</span>")
+						        }
+						    });
     					}
     					
     					function addCartSubmit() {
@@ -1515,7 +1581,7 @@ if ($add_cart_value == "1") {
 					<!-- Phan gia ca tham khao-->
 				</div>
 		
-				<aside class="view-detail-right" style="margin-top: 106px;">
+				<div class="view-detail-right" id="box-right">
 					<div class="detail-right-box care-detail">
 						<div class="detail-right-box-title">Thông tin hữu ích</div>
 						<div class="detail-right-box-wrap">
@@ -1545,13 +1611,13 @@ if ($add_cart_value == "1") {
 								<div class="support-ask-body">
 									<div class="support-ask-item">
 										<span class="support-ask-icon"> <a
-											href="<?=Common::$_HOME_PAGE?>" title="Chat Facebook"> <img
+											href="<?=Common::$_HOME_PAGE?>" title="Chat Facebook" target="_blank"> <img
 												class="lazy-img lazy-loaded"
 												src="template/images/messenger-icon.png"
 												data-src="template/images/messenger-icon.png">
 										</a>
 										</span> <span class="support-ask-name"><a
-											href="<?=Common::$_HOME_PAGE?>" title="Chat Facebook">nganphat</a>
+											href="<?=Common::$_HOME_PAGE?>" title="Chat Facebook" target="_blank">nganphat</a>
 										</span>
 									</div>
 									<div class="support-ask-item">
@@ -1559,10 +1625,10 @@ if ($add_cart_value == "1") {
 											title="Chat Zalo với Ngân Phát"> <img
 												class="lazy-img lazy-loaded"
 												src="template/images/zalo-icon.png"
-												data-src="template/images/zalo-icon.png">
+												data-src="template/images/zalo-icon.png" target="_blank">
 										</a>
 										</span> <span class="support-ask-name"> <a
-											href="zalo://0983573166" title="Chat Zalo với Ngân Phát">0983
+											href="zalo://0983573166" title="Chat Zalo với Ngân Phát" target="_blank">0983
 												573 166</a>
 										</span>
 									</div>
@@ -1590,8 +1656,14 @@ if ($add_cart_value == "1") {
 							</div>
 						</div>
 					</div>
-				</aside>
-				
+				</div>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						let infoRight = $('.Product-info-right-name').height();
+						$('#box-right').css('margin-top', infoRight+'px')
+						$('.Product-info-right-top').css('margin-top', infoRight+'px')
+					})
+				</script>
 				<!-- Noi dat Iframe lich su ton kho-->
 			</div>
 	</form>	
@@ -1614,6 +1686,12 @@ if ($add_cart_value == "1") {
 								class="specs-right block"><?=$row100['product_code']?></span></li>
 							<li><span class="specs-left block">Kiểu dáng</span> <span
 								class="specs-right block"><?=$row100['product_style']?></span></li>
+							<li><span class="specs-left block">Kích thước</span> <span
+								class="specs-right block"><?=$row100['product_size']?></span></li>
+							<li><span class="specs-left block">Màu sắc</span> <span
+								class="specs-right block"><?=$row100['product_color']?></span></li>
+								<li><span class="specs-left block">Chất liệu</span> <span
+								class="specs-right block"><?=$row100['product_material']?></span></li>
 							<li><span class="specs-left block">Nơi sản xuất</span> <span
 								class="specs-right block"><?=$row100['product_made_in']?></span>
 							</li>
@@ -1636,22 +1714,42 @@ if ($add_cart_value == "1") {
 					$group_product_item = $conn->query($group_product_item_sql);
 				?>
 				<div class="container-group-product">
-					<?php while ($data_row = $group_product_item->fetch_assoc()) { ?>
-					<div class="border-custom" id="group-product-<?= $data_row['product_id'] ?>" onclick="clickItem(<?= $data_row['product_id'] ?>)">
+					<?php while ($data_row = $group_product_item->fetch_assoc()) { 
+						$sell_price = (int)$data_row['product_sell_price'] ?? 0;
+						$old_price = (int)$data_row['product_old_price'] ?? 0;
+						$product_sell_price = $sell_price ? number_format($sell_price, 0) : 0;
+						$product_old_price = $old_price ? number_format($old_price, 0) : 0;
+						if ($sell_price > $old_price) {
+							$sale_off = 0;
+						}else if($sell_price < 0 || $old_price < 0 ) {
+							$sale_off = 0;
+						}else {
+							$sale_off = number_format($old_price - $sell_price, 0) ?? 0;
+						}
+						?>
+					<div class="border-custom" id="group-product-<?= $data_row['product_id'] ?>" onclick="clickItem(<?= $data_row['product_id'] ?>, <?= "'".$product_sell_price."'"; ?>, <?= "'".$product_old_price."'"; ?>, <?= "'".$sale_off."'" ?>)">
 						<div class="box-group-product">
 							<input id="radio-<?= $data_row['product_id'] ?>" class="radio-group-product" type="radio" name="group_product" value="<?= $data_row['product_id'] ?>"> 
 							<label for="group_product">&nbsp;<?= $data_row['product_name'] ?></label>
 						</div>
-						<h2><?= number_format($data_row['product_sell_price'], 0) ?> đ</h2>
-						<?php if($data_row['product_sell_price'] < $data_row['product_old_price']) { ?> 
-						<p><s><?= number_format($data_row['product_old_price'], 0) ?> đ</s></p>
+						<h2><?= $product_sell_price ?> đ</h2>
+						<?php if($old_price > $sell_price) { ?> 
+						<p><s><?= $product_old_price ?> đ</s></p>
 						<?php } ?>
 					</div>
 					<?php } ?>
 				</div>
+				<div id="box-choose-more" style="border: dotted 1px black; border-radius: 5px; margin: 15px; padding: 15px; display: none;">
+					<div class="title-specs" style="display: inline-flex;" id="choose-more">
+					</div>
+				</div>
 				<script type="text/javascript">
-					function clickItem(product_id){
+					function clickItem(product_id, sell_price, old_price, sale_off){
 						document.getElementById("radio-" + product_id).checked = true;
+						$("#box-choose-more").css('display', 'block');
+						$("#choose-more").children().remove();
+						let dom = '<h1 style="color: red; font-size: 150%;" id="choose-more">'+ sell_price +'đ</h1><span style="display: inline-flex">&nbsp;&nbsp;<s>'+ old_price +' đ</s>&nbsp;&nbsp;<h3 style="color: red">Tiết kiệm: '+ sale_off +'đ</h3></span>'
+						$("#choose-more").append(dom);
 					}
 				</script>
 			</article>

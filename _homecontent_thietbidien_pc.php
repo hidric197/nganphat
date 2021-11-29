@@ -15,6 +15,7 @@
 				$sqlgr .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
 				$sqlgr .= " WHERE  A.group_type = '" .Common::$_GROUP_THIET_BI_DIEN_TYPE. "' AND A.group_level_up = '" .Common::$_GROUP_THIET_BI_DIEN_TYPE. "' ";
 				$sqlgr .= " AND  A.delete_flag = '0' ";
+				$sqlgr .= " GROUP BY A.product_id ";
 				$sqlgr .= " ORDER BY A.group_id ";
 				$sqlgr .= " Limit 5 ";
 				
@@ -57,6 +58,7 @@
     			
 				$sql .= " WHERE  P.group_type = '" .Common::$_GROUP_THIET_BI_DIEN_TYPE. "' ";
 				$sql .= " AND  A.delete_flag = '0' ";
+				$sql .= " GROUP BY A.product_id ";
 				$sql .= " ORDER BY A.product_id DESC ";
 				$sql .= " Limit 10 ";
 				
@@ -155,6 +157,7 @@
         		$sql .= " LEFT OUTER JOIN np_prod_vote F ON A.product_id = F.product_id ";
         		$sql .= " WHERE  P.group_type = '" .Common::$_GROUP_THIET_BI_DIEN_TYPE. "' ";
         		$sql .= " AND  A.delete_flag = '0' ";
+        		$sql .= " GROUP BY A.product_id ";
         		$sql .= " ORDER BY A.product_count_view DESC ";
         		$sql .= " Limit 5 ";
         		

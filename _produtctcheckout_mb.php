@@ -195,7 +195,7 @@
 										<div class="checkout-info-title-col sum">Thành tiền</div>
 									</div>
                                  -->
-									<div class="checkout-info-body-detail">
+									<div class="checkout-info-body-detail" style="margin-top:50px">
 										<ul class="list-product-checkout">
 									<?php 
 										$totalMoney = 0;
@@ -209,6 +209,7 @@
 										    $sqlCo .= " INNER JOIN np_prod_image E ON A.product_id = E.product_id AND E.image_type = '1' ";
 										    $sqlCo .= " WHERE  A.product_id = '" .$productId. "' ";
 										    $sqlCo .= " AND  A.delete_flag = '0' ";
+										    $sqlCo .= " GROUP BY  A.product_id";
 										    
 										    $resultCo = $conn->query($sqlCo);
 										    if ($resultCo->num_rows > 0) {
@@ -247,7 +248,7 @@
                             																<tr>
                             																	<td class="input-group-btn">
                             																		<button class="btn-among down"
-                            																			onclick="return change_qty_detail('qty_<?=$productId?>',-1)">-</button>
+                            																			onclick="return change_qty_detail('qty_<?=$productId?>',-1, <?=$rowCo['product_sell_price']?>)">-</button>
                             																	</td>
                             																	<td class="input-txt-among">
                             																	<input type="text" class="form-among txtQty-cart"
@@ -259,7 +260,7 @@
                             																		</td>
                             																	<td class="input-group-btn">
                             																		<button class="btn-among up"
-                            																			onclick="return change_qty_detail('qty_<?=$productId?>',1)">+</button>
+                            																			onclick="return change_qty_detail('qty_<?=$productId?>',1, <?=$rowCo['product_sell_price']?>)">+</button>
                             																	</td>
                             																</tr>
                             															</tbody>
@@ -300,7 +301,7 @@
 										</ul>
 										<input type="hidden" name="del_prod_id" id="del_prod_id" value="">
 										<script language="JavaScript" type="text/javascript">
-                                            function change_qty_detail(id, step) {
+                                            function change_qty_detail(id, step, price) {
                                                 var $txt = $('#' + id);
                                                 var min = parseInt($txt.attr('min'));
                                                 var number = parseInt($txt.val()) + step;
@@ -310,6 +311,8 @@
                                                 }
                                                 $txt.val(number > 1 ? number : 1);
                                                 $txt.trigger('modified');
+                                                var total_price = $('#total_price').text((price*number).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + ' đ')
+												$('input[name=reset_cart]').click()
                                                 return false;
                                             }
                                             
@@ -364,12 +367,12 @@
 												</div>
                                             -->
                                             	<div class="checkout-sumary-row" align="right">
-													<input type="submit" class="btn-login" name="reset_cart"
+													<input type="hidden" class="btn-login" name="reset_cart"
 														value="Làm mới giỏ hàng" title="Làm mới giỏ hàng" style="width: 40%">
 												</div>
 												<div class="checkout-sumary-row total">
 													<div class="checkout-sumary-left">Tổng tiền:</div>
-													<div class="checkout-sumary-right"><?=number_format($totalMoney)?>đ</div>
+													<div class="checkout-sumary-right" id="total_price"><?=number_format($totalMoney)?>đ</div>
 												</div>
 											</div>
 											<br><br>

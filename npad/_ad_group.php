@@ -359,7 +359,7 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
 					<td><?=NpPermaLinkDba::countData($conn, "np_product", "group_id = '" . $row['group_id'] ."'"); ?></td>
 					<td><?=$row['image_url']?> | <a href="?pcid=imggrd&display=addnew&id=<?=$row['group_id']?>&grdname=<?=$row['group_name']?>&table=np_group_image">Update Ảnh</a></td>
 					<td>
-						<a href="?pcid=<?=$_REQUEST['pcid']?>&display=addnew&id=<?=$row['group_id']?>&grdlv=<?=$row['group_level']?>&group_type=<?=$row['group_type']?>">add</a>
+						<a href="?pcid=<?=$_REQUEST['pcid']?>&display=addnew&id=<?=$row['group_id']?>&grdlv=<?=$row['group_level']?>&group_type=<?=$row['group_type']?>">add (lv2)</a>
 					</td>
 					<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=edit&id=<?=$row['group_id']?>">Sửa</a></td>
 					<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=list&action=delete&id=<?=$row['group_id']?>"
@@ -401,6 +401,7 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
 					<td><?=NpPermaLinkDba::countData($conn, "np_product", "group_id = '" . $row2['group_id'] ."'"); ?></td>
 					<td><?=$row2['image_url']?> | <a href="?pcid=imggrd&display=addnew&id=<?=$row2['group_id']?>&grdname=<?=$row2['group_name']?>&table=np_group_image">Update Ảnh</a></td>
 					<td>
+						<a href="?pcid=<?=$_REQUEST['pcid']?>&display=addnew&id=<?=$row2['group_id']?>&grdlv=<?=$row['group_level']+1?>&group_type=<?=$row['group_type']?>">add (lv3)</a>
 					</td>
 					<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=edit&id=<?=$row2['group_id']?>">Sửa</a></td>
 					<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=list&action=delete&id=<?=$row2['group_id']?>"
@@ -408,9 +409,56 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
 					<td><a target="blank" href="<?=Common::$_HOME_PAGE .'/'. $row2['permalink']?>">View</a></td>
 				</tr>
 				<?php 
+				if (isset($row2['group_id'])) {
+					$sql3 = "SELECT A.group_id, A.group_type, A.group_name, A.group_level, B.permalink, C.group_name AS group_up_name, A.image_url FROM np_prod_group A ";
+					$sql3 .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
+					$sql3 .= " LEFT OUTER JOIN np_prod_group C ON A.group_level_up = C.group_id ";
+					$sql3 .= " WHERE B.delete_flag = '0' AND A.group_level = '3' AND A.group_level_up = '" .$row2['group_id']. "'";
+					$sql3 .= " ORDER BY A.group_type,  A.group_id ";
+					
+					$result3 = $conn->query($sql3);
+					if ($result3->num_rows > 0) {
+					    while ($row3 = $result3->fetch_assoc()) {
+					?>
+					<tr>
+						<td><?php
+						if ($row3['group_type'] == '1') {
+	    					   echo 'G1';
+						} else if ($row3['group_type'] == '2') {
+	    					    echo 'G2';
+						} else if ($row3['group_type'] == '3') {
+	    					    echo 'G3';
+	    					}
+						?></td>
+						<td><?php
+						if ($row3['group_level'] > 2) {
+						   echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+						}
+						echo $row3['group_name'];
+						
+						?></td>
+						<td><?=$row3['permalink']?></td>
+						<td><?=$row3['group_level'] + 1?></td>
+						<td><?=$row3['group_up_name']?></td>
+						<td><?=NpPermaLinkDba::countData($conn, "np_product", "group_id = '" . $row3['group_id'] ."'"); ?></td>
+						<td><?=$row3['image_url']?> | <a href="?pcid=imggrd&display=addnew&id=<?=$row3['group_id']?>&grdname=<?=$row3['group_name']?>&table=np_group_image">Update Ảnh</a></td>
+						<td>
+						</td>
+						<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=edit&id=<?=$row3['group_id']?>">Sửa</a></td>
+						<td><a href="?pcid=<?=$_REQUEST['pcid']?>&display=list&action=delete&id=<?=$row3['group_id']?>"
+							onclick="return confirm('<?=$CONFIRM_DELETE?>');">Xóa</a></td>
+						<td><a target="blank" href="<?=Common::$_HOME_PAGE .'/'. $row3['permalink']?>">View</a></td>
+					</tr>
+					<?php 
+					    }
+					}
+				}
+				?>
+				<?php 
 				    }
 				}
 				?>
+
 				<?php 
 				}
 				?>

@@ -2,17 +2,29 @@
 <html lang="vi">
 <head>
 
-<?php include 'common_headermeta_mb.php';?>
+<?php include 'common_headermeta_mb.php';
 
+    $meta_sql = "SELECT p.product_seo FROM np_product as p WHERE p.data_id = (SELECT pl.data_id FROM np_permalink as pl WHERE pl.permalink = '".$home_estr_pmk."')";
+    $meta_tag = $conn->query($meta_sql);$meta_tag->fetch_assoc();
+    foreach($meta_tag as $meta){
+        echo $meta['product_seo'];
+    }
+?>
 <link rel=stylesheet media=all type=text/css
 	href="template/css/np_mb.css" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="template/css/header-home.min.css">
 <link type="text/css" rel="stylesheet"
 	href="template/css/details-theme.css" />
+<link type="text/css" rel="stylesheet"
+    href="template/css/lightboxed.css">
 <link rel="stylesheet" media="all" type="text/css" href="template/css/np.css">
 <link rel="stylesheet" media="all" type="text/css" href="template/css/style-home.min.css">
 <link rel="stylesheet" media="all" type="text/css" href="template/css/header-home.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body id="detail">
 <?php 
@@ -129,7 +141,7 @@ if (isset($_POST['checkout_product_id']) && ! empty($_POST['checkout_product_id'
 								            $imageurl = $row98['image_url'];
 								?>
 								<div class="swiper-slide pop-gallery">
-									<img data-idx="0" class="prod-img " data-id="img-0" alt="<?=$row98['image_title']?>"
+									<img data-idx="0" class="prod-img lightboxed" rel="group1" data-id="img-0" alt="<?=$row98['image_title']?>"
 										data-ssrc="npad/<?=$row98['image_url']?>" src="npad/<?=$row98['image_url']?>">
 								</div>
 								<?php 
@@ -147,7 +159,7 @@ if (isset($_POST['checkout_product_id']) && ! empty($_POST['checkout_product_id'
 							<div class="col-viewmore-item pop1 gallery">
 									<img class="lazy-img" alt="<?=$imagetitle?>" src="npad/<?=$imageurl?>"
 									data-src="npad/<?=$imageurl?>">
-									<div class="over-gallery">Xem <?=$imageCount?> hình</div>
+									<div class="over-gallery" id="show-light-box">Xem <?=$imageCount?> hình</div>
 							</div>
 
 							<div class="col-viewmore-item comment">
@@ -186,6 +198,9 @@ if (isset($_POST['checkout_product_id']) && ! empty($_POST['checkout_product_id'
         return false;
     }
     $(document).ready(function () {
+        $("#show-light-box").click(function(){
+            $('img[rel=group1]').first().click();
+        });
             $('.title-hotline-more').click(function () {
                 var $box = $(this).closest('.box-hotline-more');
                 $box.toggleClass('expanded');
@@ -597,7 +612,7 @@ span.among-buy {
 								</a>
 							</div>
 							<div class="btn-supp-wrap supp-now">
-								<a class="btn-shopp-manual btn-supp" href="#" id="btn-supp-prod" onclick="checkoutSubmit();"> <span
+								<a class="btn-shopp-manual btn-supp" rel="nofollow" id="btn-supp-prod" data-toggle="modal" data-target="#exampleModal"><span
 									class="icon-shopp icon-supp"></span> <span class="txt-shopp"> <span
 										class="txt-buy-now">Tư vấn</span>
 								</span>
@@ -660,6 +675,33 @@ span.among-buy {
 						<div class="div-showhide-stock"></div>
 					</div>
 					</form>
+                    <!-- Tư vấn -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Điền thông tin</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                            <div class="modal-body">
+                                Họ tên:<br>
+                                <input class="form-control" type="text" size="19" name="mail_name" id="mail_name"><br>
+                                Số điện thoại:<br>
+                                <input class="form-control" type="text" size="19" name="mail_phone" id="mail_phone"><br>
+                                Email liên hệ:<br>
+                                <input class="form-control" type="text" size="19" name="mail_contact" id="mail_contact"><br>
+                                Nội dung:<br> <textarea class="form-control" name="mail_content" rows="6" cols="20" id="mail_content"></textarea><br>
+                                <div id="res_ajax">&nbsp;</div>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-success" onclick="supportSubmit()">Gửi</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close">Đóng</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
 					<script type="text/javascript" lang="javascript">
     					function checkoutSubmit() {
     						document.form_checkout_product.action = "mua-hang";
@@ -667,8 +709,30 @@ span.among-buy {
     					}
     					
     					function supportSubmit() {
-    						document.form_checkout_product.action = "mua-hang";
-    						document.getElementById("form_checkout_product").submit();
+    						var name = $('#mail_name').val();
+                            var phone = $('#mail_phone').val();
+                            var contact = $('#mail_contact').val();
+                            var content = $('#mail_content').val();
+                            var url = location.href;
+                            $('#res_ajax').children().remove();
+                             $.ajax({
+                                url: "_sendMail.php",
+                                type: "post",
+                                data: {mail_name: name, mail_phone: phone, mail_contact:contact, mail_content: content, send_url: url} ,
+                                success: function (response) {
+                                    response = JSON.parse(response)
+                                    console.log(response.message)
+                                    $('#res_ajax').append(response.message)
+                                    if (response.status == 'success') {
+                                        setTimeout(function() {
+                                            $('#modal-close').click();
+                                        }, 1000);
+                                    }
+                                },
+                                error: function () {
+                                    $('#res_ajax').append("<span style='color: red'>* Có lỗi xảy ra. Vui lòng thử lại.</span>")
+                                }
+                            });
     					}
     					
     					function addCartSubmit() {
@@ -1103,9 +1167,32 @@ span.among-buy {
         						document.getElementById("form_checkout_product").submit();
         					}
         					
-        					function supportSubmit() {
-        						document.getElementById("form_checkout_product").submit();
-        					}
+        					// function supportSubmit() {
+        					// 	var name = $('#mail_name').val();
+             //                    var phone = $('#mail_phone').val();
+             //                    var contact = $('#mail_contact').val();
+             //                    var content = $('#mail_content').val();
+             //                    var url = location.href;
+             //                    $('#res_ajax').children().remove();
+             //                    $.ajax({
+             //                        url: "_sendMail.php",
+             //                        type: "post",
+             //                        data: {mail_name: name, mail_phone: phone, mail_contact:contact, mail_content: content, send_url: url} ,
+             //                        success: function (response) {
+             //                            response = JSON.parse(response)
+             //                            console.log(response.message)
+             //                            $('#res_ajax').append(response.message)
+             //                            if (response.status == 'success') {
+             //                                setTimeout(function() {
+             //                                    $('#modal-close').click();
+             //                                }, 1000);
+             //                            }
+             //                        },
+             //                        error: function () {
+             //                            $('#res_ajax').append("<span style='color: red'>* Có lỗi xảy ra. Vui lòng thử lại.</span>")
+             //                        }
+             //                    });
+        					// }
 				
 						</script>
 					</div>

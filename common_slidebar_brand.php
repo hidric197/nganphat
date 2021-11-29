@@ -23,7 +23,7 @@ if (isset($_GET['filter_price']) && !empty($_GET['filter_price'])) {
     		    while ($rowBrand = $resultBrand->fetch_assoc()) {
 		?>
 			<li class="filter-item" title="<?=$rowBrand['brand_name']?>">
-				<label for="filter_brand_<?=$rowBrand['brand_id']?>" class="select-filter-item" onclick="submitFormFilterBrand('<?=$rowBrand['brand_id']?>');">
+				<label for="filter_brand_<?=$rowBrand['brand_id']?>" class="select-filter-item" onclick="submitFormFilterBrand('<?=$rowBrand['brand_id']?>', <?="filter_brand_".$rowBrand['brand_id']?>);">
 					<input class="chk-price-select" id="filter_brand_<?=$rowBrand['brand_id']?>" type="checkbox" name="filter_brand_<?=$rowBrand['brand_id']?>" value="" <?php if($filter_brand == $rowBrand['brand_id']) echo "checked='checked'"; ?> >
 					<span title="<?=$rowBrand['brand_name']?>" class="price-checker-link filter-check"></span>
 					<span class="filter-link"><?=$rowBrand['brand_name']?>
@@ -37,17 +37,20 @@ if (isset($_GET['filter_price']) && !empty($_GET['filter_price'])) {
 		</ul>
 	</div>
 </div>
-	<input type="hidden" name="filter_brand" id="filter_brand" value="<?=$filter_brand?>">
-	<input type="hidden" name="filter_price" value="<?=$filter_price?>">
+	<!-- <input type="hidden" name="filter_brand" id="filter_brand" value="<?=$filter_brand?>">
+	<input type="hidden" name="filter_price" value="<?=$filter_price?>"> -->
 </form>
 <script language="JavaScript" type="text/javascript">
-	function submitFormFilterBrand(brandId) {
+	
+	function submitFormFilterBrand(brandId, dom) {
 		const params = new URLSearchParams(window.location.search)
-		let url = "?filter_brand=" + brandId
+		let url = dom.checked ? ("?filter_brand=" + brandId) : "?"
+		let filter_brand = dom.checked ? "filter_brand=" + brandId : ''
 		if (params.has('filter_price')) {
-			url = "?filter_brand="+ brandId + "&filter_price=" + params.get('filter_price')
+			url = (filter_brand ? "?" + filter_brand + "&": "?") + "filter_price=" + params.get('filter_price')
 		}
 		location.href = url
 		// document.getElementById("form_filter_brand").submit();
 	}	
+
 </script>

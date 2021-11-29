@@ -52,7 +52,7 @@ if (isset($_SESSION[Common::$SESSION_USER_VIEW_PRODUCT]) && !empty($_SESSION[Com
 		?>
 			<li class="product-highlight-item prod-item" data-pid="10197">
 				<?php 
-				    if ($row10['product_down_price'] != '0') {
+				    if ($row10['product_down_price'] > 0) {
     			?>
 				<div
 					class="prod-hl-discount">

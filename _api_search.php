@@ -9,9 +9,8 @@ if (!empty($keyword)){
     
 $n = 1;
 ?>
-
-<div class="ac_wrapper"
-	style="position: relative; padding-bottom: 30px;">
+</style>
+<div class="ac_wrapper" style="position: relative; padding-bottom: 30px; z-index: 999;">
 	<ul class="ac_list" style="max-height: 360px; overflow: auto;">
 	<?php 
 	$sql = "SELECT B.permalink AS prd_permalink, B.data_table";
@@ -21,6 +20,7 @@ $n = 1;
 	$sql .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
 	$sql .= " INNER JOIN np_prod_image E ON A.product_id = E.product_id AND E.image_type = '1' ";
 	$sql .= " WHERE  A.product_name LIKE '%". $keyword. "%' ";
+	$sql .= " GROUP BY  A.product_id ";
 	$sql .= " ORDER BY product_count_view DESC ";
 	$sql .= " LIMIT 20 ";
 
@@ -47,7 +47,7 @@ $n = 1;
 						<div onmouseover="changeColorRow('<?=$row['product_id']?>');" onmouseout="changeBackColor('<?=$row['product_id']?>','<?=$color?>');">
 							<a href="<?=$row['prd_permalink']?>">
 								<img src="npad/<?=$row['image_url']?>" width="42" height="42" align="absmiddle">
-    							<?=$row['product_name']?></a>
+    							<?=$row['product_name']?>
 								<span style="color: red">Chi tiết</span>
 							</a>
 						</div>
@@ -107,8 +107,7 @@ $n = 1;
 }
 
 </style>
-<div class="ac_wrapper"
-	style="position: relative; padding-bottom: 30px; z-index: 1;">
+<div class="ac_wrapper" style="position: relative; padding-bottom: 30px; z-index: 999;">
 	<ul class="ac_list" style="max-height: 360px; overflow: auto;">
   <div class="trend-catalog wrap-catalog-main">
 	<div class="trend-catalog-title">

@@ -6,28 +6,6 @@
 			</h2>
 		</div>
 		<div class="box-cat-all">
-			<?php 
-				$sqlgr = "SELECT A.group_name, B.permalink ";
-				$sqlgr .= " FROM np_prod_group A";
-				$sqlgr .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
-				$sqlgr .= " WHERE  A.group_type = '" .Common::$_GROUP_THIET_BI_VE_SINH_TYPE. "' AND A.group_level_up = '" .Common::$_GROUP_THIET_BI_VE_SINH_TYPE. "' ";
-				$sqlgr .= " AND  A.delete_flag = '0' ";
-				$sqlgr .= " ORDER BY A.group_id ";
-				$sqlgr .= " Limit 2 ";
-				
-				
-				$group_result = $conn->query($sqlgr);
-				if ($group_result->num_rows > 0) {
-				    while ($rowgr = $group_result->fetch_assoc()) {
-			?>
-
-			<a class="link_group" href="<?=$rowgr['permalink'] ?>"
-				title="<?=$rowgr['group_name'] ?>"><?=$rowgr['group_name'] ?></a>
-			&nbsp;			
-			<?php
-				    }
-				}
-			?>
 			<a class="link_group" href="<?=Common::$_GROUP_THIET_BI_VE_SINH?>"
 				title="Xem tất cả sản phẩm Thiết bị vệ sinh">Xem tất cả<i
 				class="fa fa-chevron-right" aria-hidden="true"></i></a>
@@ -47,6 +25,7 @@
 				$sql .= " INNER JOIN np_prod_image E ON A.product_id = E.product_id AND E.image_type = '1' ";
 				$sql .= " WHERE  P.group_type = '" .Common::$_GROUP_THIET_BI_VE_SINH_TYPE. "' ";
 				$sql .= " AND  A.delete_flag = '0' ";
+				$sql .= " GROUP BY A.product_id ";
 				$sql .= " ORDER BY A.product_id DESC ";
 				$sql .= " Limit 6 ";
 				
@@ -107,6 +86,7 @@
         		$sql .= " LEFT OUTER JOIN np_prod_vote F ON A.product_id = F.product_id ";
         		$sql .= " WHERE  P.group_type = '" .Common::$_GROUP_THIET_BI_VE_SINH_TYPE. "' ";
         		$sql .= " AND  A.delete_flag = '0' ";
+        		$sql .= " GROUP BY A.product_id ";
         		$sql .= " ORDER BY A.product_count_view DESC ";
         		$sql .= " Limit 5 ";
         		

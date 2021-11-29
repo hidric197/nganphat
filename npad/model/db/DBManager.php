@@ -3,15 +3,15 @@ class DBManager
 {
     static function getConnection()
     {
-//         $dbadress = 'localhost';
-//         $dbuser = 'root';
-//         $dbpass = 'root';
-//         $dbname = 'nganphatdb';
-        
         $dbadress = 'localhost';
         $dbuser = 'root';
         $dbpass = '';
         $dbname = 'nganphat_db';
+        
+        // $dbadress = 'localhost';
+        // $dbuser = 'nganphat_user';
+        // $dbpass = 'JB:s?+qT:xBMP^,W9=0';
+        // $dbname = 'nganphat_db';
 
         $conn = mysqli_connect($dbadress, $dbuser, $dbpass, $dbname);
         if ($conn->connect_error) {

@@ -164,7 +164,7 @@
     display: inline-block;
     margin-left: 10px;
     line-height: 33px;
-    width: calc(100% - 130px);
+    /*width: calc(100% - 130px);*/
 }
 
 .product-checkout-item-among {
@@ -180,7 +180,7 @@
     display: inline-block;
     line-height: 30px;
     width: 20px;
-    margin-right: 10px;
+    margin-left: 10px;
     text-align: center;
 }
 
@@ -509,12 +509,12 @@ input[type="radio"]:checked + label span {
 .checkout-sumary-left {
     min-width: 140px;
     display: inline-block;
-    text-align: right;
+    /*text-align: right;*/
 }
 
 .checkout-sumary-right {
     display: inline-block;
-    float: right;
+    /*float: right;*/
 }
 
 .checkout-sumary-row {
@@ -522,7 +522,7 @@ input[type="radio"]:checked + label span {
 }
 
     .checkout-sumary-row.total {
-        border-top: 1px solid #eee;
+
         color: #da251c;
         font-weight: bold;
         margin-top: 5px;
@@ -2050,13 +2050,13 @@ input[type=number] {
 
     .checkout-sumary-left {
         display: inline-block;
-        text-align: right;
+        /*text-align: right;*/
         margin-right: 0;
     }
 
     .checkout-sumary-right {
         display: inline-block;
-        float: right;
+        /*float: right;*/
         margin-right: 10px;
     }
 
@@ -2473,7 +2473,7 @@ input[type=number] {
         }
 
     .product-checkout-item-price {
-        width: 17%;
+        width: 20%;
         margin: 0 10px;
         line-height: unset;
         text-align: right;
@@ -2511,7 +2511,7 @@ input[type=number] {
     }
 
     .choose-more {
-        width: 30%;
+        width: 33.32%;
         display: inline-block;
         margin: 5px 10px;
     }
@@ -2530,12 +2530,12 @@ input[type=number] {
     .checkout-sumary-left {
         min-width: 200px;
         display: inline-block;
-        text-align: right;
+        padding-left: 15px;
     }
 
     .checkout-sumary-right {
         display: inline-block;
-        float: right;
+        /*float: right;*/
     }
 
     .checkout-info-box.buyer .checkout-info-title {

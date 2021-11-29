@@ -167,6 +167,12 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 
 					<?php include 'common_slidebar_price.php';?>
 
+					<?php 
+						if ($home_level_group == 1 || $home_level_group == 2) {
+					       	include 'common_slidebar_type_brand.php';
+					    }
+					?>
+
 					<div class="body-left-box filter-manu filter-general">
 						<div class="body-left-title-filter"></div>
 						<div class="body-left-box-sub-under"></div>
@@ -338,7 +344,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
                 		if (isset($_POST['sort-select']) && !empty($_POST['sort-select'])) {
                 		    $sort_select = $_POST['sort-select'];
                 		    if ($sort_select == '01') {
-                		        $sql .= " ORDER BY A.product_sell_price ";
+                		        $sql .= " ORDER BY A.product_sell_price ASC ";
                 		    } else  if ($sort_select == '02') {
                 		        $sql .= " ORDER BY A.product_sell_price DESC ";
                 		    } else  if ($sort_select == '03') {
@@ -488,7 +494,7 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 												<a href="<?=$row10['brand_permalink']?>"><?=$row10['brand_name']?></a>
 											</div>
 											<?php 
-    											if ($home_pmk != 'flash-sale')
+    											if ($home_pmk != 'flash-sale' || $home_pmk != 'khuyen-mai')
     											{
 											?>
     											<div class="product-rate">
@@ -666,7 +672,6 @@ if ($home_table_name == Common::$_TABLE_NP_PROD_BRAND){
 						<div id="catalogSub-support" class="box-catalog-main support">
 							<?php include 'common_services.php';?>
 						</div>
-						
 					</div>
 				</section>
 			</div>

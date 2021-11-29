@@ -95,8 +95,8 @@ if (isset($_REQUEST['pmk']) && ! empty($_REQUEST['pmk'])) {
             $sql .= " INNER JOIN np_permalink X ON X.data_id = A.data_id ";
             $sql .= " INNER JOIN np_product B ON B.group_id = A.group_id ";
             $sql .= " INNER JOIN np_permalink C ON C.data_id = B.data_id ";
-            $sql .= " INNER JOIN np_prod_filter Y ON Y.prod_filter_id = B.filter_id ";
-            $sql .= " INNER JOIN np_permalink Z ON Y.data_id = Z.data_id ";
+            $sql .= " LEFT JOIN np_prod_filter Y ON Y.prod_filter_id = B.filter_id ";
+            $sql .= " LEFT JOIN np_permalink Z ON Y.data_id = Z.data_id ";
             $sql .= " WHERE C.permalink = '$home_estr_pmk' AND A.delete_flag = '0'";
             $filter_result = $conn->query($sql);
             if ($filter_result->num_rows > 0) {

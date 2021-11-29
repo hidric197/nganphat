@@ -1967,7 +1967,7 @@ ol.breadcrum-cat-box {
 }
 
 .title-pick {
-	background: url('https://meta.vn/Data/image/2020/10/21/dd.png')
+	background: url('../images/dd.png')
 		no-repeat 100px center;
 	background-size: 32px;
 	height: 32px;
@@ -7907,7 +7907,7 @@ label.error {
 .col-viewmore-item {
 	display: inline-block;
 	width: 66px;
-	height: 56px;
+	/*height: 56px;*/
 	text-align: center;
 	vertical-align: middle;
 	padding: 3px 0;
@@ -7932,7 +7932,7 @@ label.error {
 .over-gallery {
 	display: block;
 	width: 66px;
-	height: 48px;
+	height: 100%;
 	z-index: 1;
 	background: rgba(0, 0, 0, .5);
 	color: #fff;
@@ -7943,7 +7943,8 @@ label.error {
 	text-shadow: none;
 	position: absolute;
 	top: 0;
-	padding-top: 14px
+	padding-top: 14px;
+	padding-bottom: 14px;
 }
 
 .title-spec {
@@ -7986,6 +7987,14 @@ label.error {
 }
 
 @media screen and (min-width:1200px) {
+	#detail .menu-show {
+		display: block !important;
+	}
+
+	#detail .menu-box {
+		display: none;
+	}
+
 	.col-viewmore-item.qrcode-prod {
 		display: inline-block
 	}

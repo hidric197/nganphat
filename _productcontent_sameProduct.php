@@ -14,7 +14,7 @@
 	$sql .= " LEFT OUTER JOIN np_prod_vote F ON A.product_id = F.product_id ";
 	$sql .= " WHERE  A.group_id = '$home_group_id' ";
 	$sql .= " AND  A.delete_flag = '0' ";
-	$sql .= " Limit 10 ";
+	$sql .= " Limit 5 ";
 	
 	$result10 = $conn->query($sql);
 	if ($result10->num_rows > 0) {

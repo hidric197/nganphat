@@ -60,6 +60,7 @@
                 }, _device.isMobile ? 3500 : 3500);
             });
         });
+        // $('.menu-box').css('display', 'block');
     </script>
 	<!-- @end .slider -->
 </div>
