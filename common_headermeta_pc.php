@@ -41,8 +41,20 @@ if (isset($_REQUEST['pmk']) && ! empty($_REQUEST['pmk'])) {
 ?>
 <title>Thiết bị vệ sinh cao cấp Ngân Phát</title>
 <!-- This site is optimized with the Yoast SEO plugin v5.2 - https://yoast.com/wordpress/plugins/seo/ -->
-<meta name="description" content="Thiết bị vệ sinh Ngân Phát. Chuyên cung cấp các sản phẩm thiết bị vệ sinh cao cấp - Thiết bị nhà bếp - Thiết bị điện - Gạch ốp lát được nhập khẩu chính hãng với giá cả hợp lý và chất lượng tốt nhất Việt Nam. Miễn phí vận chuyển nội thành Hà Nội. Hotline: 04 3633 1159 – 0983 573 166 – 0916 950 756"/>
+<!-- <?php 
+	$meta_sql = "SELECT * FROM np_meta_tag WHERE delete_flag = 0 ORDER BY meta_id DESC LIMIT 1";
+	$meta_result = $conn->query($meta_sql);
+	while ($row_meta = $meta_result->fetch_assoc()) {
+		echo $row_meta['description'];
+		echo $row_meta['locale'];
+		echo $row_meta['title'];
+		echo $row_meta['url'];
+		echo $row_meta['image'];
+		echo $row_meta['card'];
+	}
+?> -->
 <link rel="canonical" href="http://nganphat.com.vn/" />
+<meta name="description" content="Thiết bị vệ sinh Ngân Phát. Chuyên cung cấp các sản phẩm thiết bị vệ sinh cao cấp - Thiết bị nhà bếp - Thiết bị điện - Gạch ốp lát được nhập khẩu chính hãng với giá cả hợp lý và chất lượng tốt nhất Việt Nam. Miễn phí vận chuyển nội thành Hà Nội. Hotline: 04 3633 1159 – 0983 573 166 – 0916 950 756"/>
 <meta property="og:locale" content="vi_VN" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Thiết bị vệ sinh phòng tắm cao cấp chính hãng - Ngân Phát" />

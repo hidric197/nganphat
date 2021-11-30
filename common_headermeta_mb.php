@@ -1,9 +1,21 @@
-<title></title>
+<title>Thiết bị vệ sinh cao cấp Ngân Phát</title>
 <meta name=viewport content="width=device-width,initial-scale=1" />
 <meta http-equiv=Content-Type content="text/html; charset=utf-8" />
 <meta http-equiv=content-language content=vi />
 <meta name=msvalidate.01 content=0F8E15F1FC570FF3636428BDB09A00BD />
 <meta name=p:domain_verify content=4928c3dc69de4909addd01b46f57350a />
+<!-- <?php 
+	$meta_sql = "SELECT * FROM np_meta_tag WHERE delete_flag = 0 ORDER BY meta_id DESC LIMIT 1";
+	$meta_result = $conn->query($meta_sql);
+	while ($row_meta = $meta_result->fetch_assoc()) {
+		echo $row_meta['description'];
+		echo $row_meta['locale'];
+		echo $row_meta['title'];
+		echo $row_meta['url'];
+		echo $row_meta['image'];
+		echo $row_meta['card'];
+	}
+?> -->
 <link rel=author href=https://plus.google.com/+MetaVn/posts />
 <link rel=publisher href=https://plus.google.com/+MetaVn />
 <meta name=theme-color content=#da251c />

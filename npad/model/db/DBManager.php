@@ -3,15 +3,15 @@ class DBManager
 {
     static function getConnection()
     {
-        $dbadress = 'localhost';
-        $dbuser = 'root';
-        $dbpass = '';
-        $dbname = 'nganphat_db';
-        
         // $dbadress = 'localhost';
-        // $dbuser = 'nganphat_user';
-        // $dbpass = 'JB:s?+qT:xBMP^,W9=0';
+        // $dbuser = 'root';
+        // $dbpass = '';
         // $dbname = 'nganphat_db';
+        
+        $dbadress = 'localhost';
+        $dbuser = 'nganphat_user';
+        $dbpass = 'JB:s?+qT:xBMP^,W9=0';
+        $dbname = 'nganphat_db';
 
         $conn = mysqli_connect($dbadress, $dbuser, $dbpass, $dbname);
         if ($conn->connect_error) {
@@ -19,6 +19,22 @@ class DBManager
         }
         $conn->set_charset("utf8mb4");
         return $conn;
+    }
+
+    static function getConnectionPDO()
+    {
+        // $dbadress = 'localhost';
+        // $dbuser = 'root';
+        // $dbpass = '';
+        // $dbname = 'nganphat_db';
+        
+        $dbadress = 'localhost';
+        $dbuser = 'nganphat_user';
+        $dbpass = 'JB:s?+qT:xBMP^,W9=0';
+        $dbname = 'nganphat_db';
+
+        $conn_pdo = new PDO("mysql:host=$dbadress;dbname=$dbname", $dbuser, $dbpass);
+        return $conn_pdo;
     }
 
     static function closeConn($conn)

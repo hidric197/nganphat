@@ -16,7 +16,7 @@ ob_start();
 
 $conn = DBManager::getConnection();
 // Turn autocommit off
-$conn -> autocommit(FALSE);
+$conn->autocommit(FALSE);
 
 ?>
 
@@ -74,6 +74,8 @@ $sql_common_update = ", insert_user = '$login_user_id' ";
 		        $pageName = '_ad_tag.php';
 		    } else if ($_REQUEST["pcid"] == 'brapd'){
 		        $pageName = '_ad_brand.php';
+		    } else if ($_REQUEST["pcid"] == 'home'){
+		        $pageName = '_ad_home.php';
 		    } else if ($_REQUEST["pcid"] == 'imgbr'){
 		        $pageName = '_ad_brand_img.php';
 		    } else if ($_REQUEST["pcid"] == 'grdpd'){

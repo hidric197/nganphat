@@ -115,53 +115,70 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
             $resultOK = 0;
         }
         
-        if ($resultOK == 0){
+        if (false){
             $message = $ERROR_FIELD_NULL;
         } else {
             $permalinkValue = $_POST['permalink'];            
             $resultOK = NpPermaLinkDba::insertData($conn, $permalinkValue, $table_name);
-            if ($resultOK == 0) {
+            if (false) {
                 $message = $ERROR_DUPLICATE_SLUG;
             } else {
                 $data_id = NpPermaLinkDba::getMaxDataId($conn);
                 $group_id = $_POST['group_id'];
                 $prod_filter_id = $_POST['prod_filter_id'];
                 $brand_id = $_POST['brand_id'];
-                $product_name = $_POST['product_name'] ?? "";
-                $product_code = $_POST['product_code'] ?? "";
-                $product_old_price = $_POST['product_old_price'] ?? null;
-                $product_down_price = $_POST['product_down_price'] ?? null;
-                $product_sell_price = $_POST['product_sell_price'] ?? null;
-                $product_status = $_POST['product_status'] ?? "";
-                $product_function = $_POST['product_function'] ?? "";
-                $product_color = $_POST['product_color'] ?? "";
-                $product_size = $_POST['product_size'] ?? "";
-                $product_material = $_POST['product_material'] ?? "";
-                $product_style = $_POST['product_style'] ?? "";
-                $product_made_in = $_POST['product_made_in'] ?? "";
-                $product_other_info = $_POST['product_other_info'] ?? "";
-                $product_save = $_POST['product_save'] ?? "";
-                $product_flash_sale = $_POST['product_flash_sale'] ?? "";
-                $product_hot = $_POST['product_hot'] ?? "";
-                $product_detail = $_POST['product_detail'] ?? "";
-                $product_seo = $_POST['product_seo'] ?? "";
-                $tag_id = $_POST['tag_id'] ?? "";
-                $product_flash_sale_time = $_POST['product_flash_sale_time'] ?? "";
-                $product_video = $_POST['product_video'] ?? "";                
-                $sql = "INSERT INTO np_product (";
-                $sql .= " data_id, group_id, filter_id, brand_id, product_name, product_code, ";
-                $sql .= " product_old_price, product_down_price, product_sell_price, product_status, product_function, ";
-                $sql .= " product_color, product_size, product_material, product_style, product_made_in, ";
-                $sql .= " product_other_info, product_save, product_flash_sale, product_hot, product_detail, product_seo, insert_user, product_flash_sale_time, product_video";
-                $sql .= ") ";
-                $sql .= " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'$login_user_id',?,?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssssssssssssssssssss", $data_id, $group_id, $prod_filter_id, $brand_id, 
-                    $product_name, $product_code, $product_old_price, $product_down_price, $product_sell_price, 
-                    $product_status, $product_function, $product_color, $product_size, $product_material, $product_style, 
-                    $product_made_in, $product_other_info, $product_save, $product_flash_sale, $product_hot, $product_detail, $product_seo, $product_flash_sale_time, $product_video);
-                $stmt->execute();
-                var_dump($stmt);die;
+                $product_name = $_POST['product_name'];
+                $product_code = $_POST['product_code'];
+                $product_old_price = $_POST['product_old_price'];
+                $product_down_price = $_POST['product_down_price'];
+                $product_sell_price = $_POST['product_sell_price'];
+                $product_status = $_POST['product_status'];
+                $product_function = $_POST['product_function'];
+                $product_color = $_POST['product_color'];
+                $product_size = $_POST['product_size'];
+                $product_material = $_POST['product_material'];
+                $product_style = $_POST['product_style'];
+                $product_made_in = $_POST['product_made_in'];
+                $product_other_info = $_POST['product_other_info'];
+                $product_save = $_POST['product_save'];
+                $product_flash_sale = $_POST['product_flash_sale'];
+                $product_hot = $_POST['product_hot'];
+                $product_detail = $_POST['product_detail'];
+                $product_seo = $_POST['product_seo'];
+                $tag_id = $_POST['tag_id'];
+                $product_flash_sale_time = $_POST['product_flash_sale_time'];
+                $product_video = $_POST['product_video'];
+                $data = [
+                	':data_id' => (int)$data_id ?? null,
+	                ':group_id' => (int)$group_id ?? null,
+	                ':filter_id' => $prod_filter_id ?? null,
+	                ':brand_id' => (int)$brand_id ?? null,
+	                ':product_name' => $product_name ?? null,
+	                ':product_code' => $product_code ?? null,
+	                ':product_old_price' => (int)$product_old_price ?? null,
+	                ':product_down_price' => (int)$product_down_price ?? null,
+	                ':product_sell_price' => (int)$product_sell_price ?? null,
+	                ':product_status' => (int)$product_status ?? 0,
+	                ':product_function' => $product_function ?? null,
+	                ':product_color' => $product_color ?? null,
+	                ':product_size' => $product_size ?? null,
+	                ':product_material' => $product_material ?? null,
+	                ':product_style' => $product_style ?? null,
+	                ':product_made_in' => $product_made_in ?? null,
+	                ':product_other_info' => $product_other_info ?? null,
+	                ':product_save' => $product_save ?? null,
+	                ':product_flash_sale' => $product_flash_sale ?? 1,
+	                ':product_hot' => $product_hot ?? 1,
+	                ':product_detail' => $product_detail ?? null,
+	                ':product_seo' => $product_seo ?? null,
+	                ':insert_user' => $login_user_id ?? 'NP',
+	                ':product_flash_sale_time' => $product_flash_sale_time ?? current_timestamp(),
+	                ':product_video' => $product_video ?? null
+                ];
+                $conn_pdo = DBManager::getConnectionPDO();
+                $sql = "INSERT INTO `np_product` (`data_id`, `group_id`, `brand_id`, `product_name`, `product_code`, `product_old_price`, `product_down_price`, `product_sell_price`, `product_status`, `product_function`, `product_color`, `product_size`, `product_material`, `product_style`, `product_made_in`, `product_other_info`, `product_save`, `product_flash_sale`, `product_hot`, `product_detail`, `insert_user`, `product_seo`, `filter_id`, `product_flash_sale_time`, `product_video`) VALUES (:data_id, :group_id, :brand_id, :product_name, :product_code,:product_old_price, :product_down_price, :product_sell_price, :product_status, :product_function,:product_color, :product_size, :product_material, :product_style, :product_made_in,:product_other_info, :product_save, :product_flash_sale, :product_hot, :product_detail,:insert_user,:product_seo, :filter_id, :product_flash_sale_time, :product_video)";
+                $stmt = $conn_pdo->prepare($sql);
+                $stmt->execute($data);
                 if (!empty($tag_id)) {
                     $id = NpPermaLinkDba::getMaxProductId($conn);
                     $arrTag = explode(",", $tag_id);
@@ -170,7 +187,7 @@ if (isset($_REQUEST['display']) && $_REQUEST['display'] == "addnew") {
                         NpPermaLinkDba::insertTagProduct($conn, trim($str), trim($slug), $id);
                     }
                 }
-                
+                DBManager::closeConnPDO();
                 $message = $INFO_INSERT_DATA_OK;
             }
         }
