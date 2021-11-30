@@ -20,6 +20,7 @@ $n = 1;
 	$sql .= " INNER JOIN np_permalink B ON A.data_id = B.data_id ";
 	$sql .= " INNER JOIN np_prod_image E ON A.product_id = E.product_id AND E.image_type = '1' ";
 	$sql .= " WHERE  A.product_name LIKE '%". $keyword. "%' ";
+	$sql .= " OR  A.product_code LIKE '%". $keyword. "%' ";
 	$sql .= " GROUP BY  A.product_id ";
 	$sql .= " ORDER BY product_count_view DESC ";
 	$sql .= " LIMIT 20 ";

@@ -14,6 +14,7 @@
 <div class="divider"></div>
 
 <?php 
+$pg_home = '';
 $pg_index = '';
 $pg_tagpd = '';
 $pg_brapd = '';
@@ -68,6 +69,8 @@ if (isset($_REQUEST['pcid'])) {
         $pg_imggrd = "active";
     } else if ($_REQUEST['pcid'] == "user") {
         $pg_user = "active";
+    } else if ($_REQUEST['pcid'] == "home") {
+        $pg_home = "active";
     } else {
         $pg_index = "active";
     }
@@ -75,6 +78,16 @@ if (isset($_REQUEST['pcid'])) {
     $pg_index = "active";
 }
 ?>
+<style>
+	ul li {
+		overflow: hidden;
+	    white-space: nowrap; 
+	    text-overflow: ellipsis;
+	}
+	ul li a {
+		font-size: 14px;
+	}
+</style>
 
 <ul class="nav menu">
 	<li class="<?=$pg_index?>"><a href="?pcid=index"><em class="fa fa-dashboard">&nbsp;</em>
@@ -82,32 +95,43 @@ if (isset($_REQUEST['pcid'])) {
 	<!-- active -->
 	<li class="parent">
 		<a data-toggle="collapse" href="#"> <em
+			class="fa fa-navicon">&nbsp;</em> Quản lý trang chủ
+		</a> 
+		<!-- expand collapse -->
+		<ul class="children expand" id="sub-item-1">
+			<li title="Quản lý thẻ meta"><a class="<?=$pg_home?>" href="?pcid=home"> <span
+					class="fa fa-arrow-right">&nbsp;</span> Quản lý thẻ meta
+			</a></li>
+		</ul>
+	</li>
+	<li class="parent">
+		<a data-toggle="collapse" href="#"> <em
 			class="fa fa-navicon">&nbsp;</em> Quản lý sản phẩm
 		</a> 
 		<!-- expand collapse -->
 		<ul class="children expand" id="sub-item-1">
-			<li><a class="<?=$pg_tagpd?>" href="?pcid=tagpd"> <span
+			<li title="Tag"><a class="<?=$pg_tagpd?>" href="?pcid=tagpd"> <span
 					class="fa fa-arrow-right">&nbsp;</span> Tag
 			</a></li>
-			<li><a class="<?=$pg_brapd?>" href="?pcid=brapd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Brand sản phẩm"><a class="<?=$pg_brapd?>" href="?pcid=brapd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Brand sản phẩm
 			</a></li>
-			<li><a class="<?=$pg_imgbr?>" href="?pcid=imgbr"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Ảnh Brand"><a class="<?=$pg_imgbr?>" href="?pcid=imgbr"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Ảnh Brand
 			</a></li>
-			<li><a class="<?=$pg_grdpd?>" href="?pcid=grdpd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Group sản phẩm"><a class="<?=$pg_grdpd?>" href="?pcid=grdpd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Group sản phẩm
 			</a></li>
-			<li><a class="<?=$pg_imggrd?>" href="?pcid=imggrd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Ảnh Group sản phẩm"><a class="<?=$pg_imggrd?>" href="?pcid=imggrd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Ảnh Group sản phẩm
 			</a></li>
-			<li><a class="<?=$pg_filterpd?>" href="?pcid=filterpd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Bộ lọc Thương hiệu Group"><a class="<?=$pg_filterpd?>" href="?pcid=filterpd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Bộ lọc Thương hiệu Group
 			</a></li>
-			<li><a class="<?=$pg_imgfilterpd?>" href="?pcid=imgfilterpd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Ảnh Bộ lọc Thương hiệu Group"><a class="<?=$pg_imgfilterpd?>" href="?pcid=imgfilterpd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Ảnh Bộ lọc Thương hiệu Group
 			</a></li>
-			<li><a class="<?=$pg_detpd?>" href="?pcid=detpd"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Sản phẩm"><a class="<?=$pg_detpd?>" href="?pcid=detpd"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Sản phẩm
 			</a></li>
 		</ul>
@@ -118,26 +142,27 @@ if (isset($_REQUEST['pcid'])) {
 		</a> 
 		<!-- expand collapse -->
 		<ul class="children expand" id="sub-item-1">
-			<li><a class="<?=$pg_grdpg?>" href="?pcid=grdpg"> <span
+			<li title="Nhóm Bài Viết"><a class="<?=$pg_grdpg?>" href="?pcid=grdpg"> <span
 					class="fa fa-arrow-right">&nbsp;</span> Nhóm Bài Viết
 			</a></li>
-			<li><a class="<?=$pg_detpg?>" href="?pcid=detpg"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Bài Viết"><a class="<?=$pg_detpg?>" href="?pcid=detpg"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Bài Viết
-			</a></li><li><a class="<?=$pg_detpgImg?>" href="?pcid=detpgImg"> <span class="fa fa-arrow-right">&nbsp;</span>
+			</a></li>
+			<li title="Ảnh Bìa Bài Viết"><a class="<?=$pg_detpgImg?>" href="?pcid=detpgImg"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Ảnh Bìa Bài Viết
 			</a></li>
-			<li><a class="<?=$pg_landingpg?>" href="?pcid=landingpg"> <span class="fa fa-arrow-right">&nbsp;</span>
+			<li title="Landing Page"><a class="<?=$pg_landingpg?>" href="?pcid=landingpg"> <span class="fa fa-arrow-right">&nbsp;</span>
 					Landing Page
 			</a></li>
 		</ul>
 	</li>
-	<li class="<?=$pg_imgads?>"><a href="?pcid=imgads"><em class="fa fa-navicon">&nbsp;</em>
+	<li class="<?=$pg_imgads?>" title="Quản Lý Ảnh Banner"><a href="?pcid=imgads"><em class="fa fa-navicon">&nbsp;</em>
 			Quản Lý Ảnh Banner</a></li>
-	<li class="<?=$pg_comment?>"><a href="?pcid=comment"><em class="fa fa-navicon">&nbsp;</em>
+	<li class="<?=$pg_comment?>" title="Quản Lý Comment"><a href="?pcid=comment"><em class="fa fa-navicon">&nbsp;</em>
 			Quản Lý Comment</a></li>
-	<li class="<?=$pg_order?>"><a href="?pcid=order"><em class="fa fa-navicon">&nbsp;</em>
+	<li class="<?=$pg_order?>" title="Quản Lý Đơn hàng"><a href="?pcid=order"><em class="fa fa-navicon">&nbsp;</em>
 			Quản Lý Đơn hàng</a></li>
-	<li class="<?=$pg_user?>"><a href="?pcid=user"><em class="fa fa-navicon">&nbsp;</em>
+	<li class="<?=$pg_user?>" title="Quản Lý User"><a href="?pcid=user"><em class="fa fa-navicon">&nbsp;</em>
 			Quản Lý User</a></li>
 	
 	<li><a href="?pcid=logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>

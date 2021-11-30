@@ -1,10 +1,5 @@
 <?php 
-$table_name = 'np_product';
-$fieldCondidtonName = 'product_id';
-$fieldConditionValue = '';
-$fieldEditName = 'product_name';
-$fieldEditValue = '';
-$permalinkValue = '';
+$table_name = 'np_home';
     
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -74,16 +69,16 @@ $permalinkValue = '';
 	<ol class="breadcrumb">
 		<li><a href="<?php  echo Common::$_HOME_PAGE .'/npad/' ?>"> <em class="fa fa-home"></em>
 		</a></li>
-		<li class="active">Quản lý Sản Phẩm</li>
+		<li class="active">Quản lý trang chủ</li>
 	</ol>
 </div>
 <!--/.row-->
 <div class="row">
 	<div class="col-lg-12">
 		</br> <a href="?pcid=<?=$_REQUEST['pcid']?>&display=list"><button
-				type="button" class="btn btn-sm btn-primary">Danh sách Sản Phẩm</button></a>
+				type="button" class="btn btn-sm btn-primary">Danh sách Thẻ Meta</button></a>
 		<a href="?pcid=<?=$_REQUEST['pcid']?>&display=addnew"><button
-				type="button" class="btn btn-sm btn-success">Thêm Sản Phẩm</button></a> </br>
+				type="button" class="btn btn-sm btn-success">Thêm Thẻ Meta</button></a> </br>
 		</br>
 	</div>
 </div>

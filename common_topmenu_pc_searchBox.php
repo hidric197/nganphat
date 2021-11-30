@@ -36,6 +36,7 @@
         var container = $("#suggesstion-box");
         if (!container.is(e.target) && container.has(e.target).length === 0) 
         {
+            $('#center-m').css({'filter': 'brightness(1)', 'background-color': 'unset','opacity': '1'})
             container.hide();
         }
     });
@@ -52,6 +53,7 @@
     		},
     		success: function(data){
     			$("#suggesstion-box").show();
+                $('#center-m').css({'filter': 'brightness(0.5)', 'background-color': 'gray','opacity': '0.5'})
     			$("#suggesstion-box").html(data);
     		}
     		});
@@ -67,6 +69,7 @@
     		},
     		success: function(data){
     			$("#suggesstion-box").show();
+                $('#center-m').css({'filter': 'brightness(0.5)', 'background-color': 'gray','opacity': '0.5'})
     			$("#suggesstion-box").html(data);
     		}
     		});

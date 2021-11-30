@@ -5107,11 +5107,11 @@ a.btn-send-content {
 		position: relative
 	}
 	.view-detail-right {
-		width: 250px;
+		width: 260px;
 		display: inline-block;
 		float: right;
 		background-color: #fff;
-		margin-right: 10px;
+		margin-right: 5px;
 		margin-top: 130px
 	}
 	.useful-item-thumb {
@@ -5361,7 +5361,7 @@ a.btn-send-content {
 		padding: 11px
 	}
 	.product-highlight-wrap .product-highlight-item {
-		width: 210px;
+		width: 220px !important;
 		text-align: left;
 		height: 330px;
 		vertical-align: top;
@@ -7908,6 +7908,7 @@ label.error {
 	display: inline-block;
 	width: 66px;
 	/*height: 56px;*/
+	min-height: 66px;
 	text-align: center;
 	vertical-align: middle;
 	padding: 3px 0;
